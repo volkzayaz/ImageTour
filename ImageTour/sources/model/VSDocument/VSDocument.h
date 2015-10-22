@@ -29,3 +29,4 @@
 - (void) deleteImage:(VSTourImage*)image;
 
 @end
+adåßß
