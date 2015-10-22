@@ -45,6 +45,7 @@
     UIImage* im = [UIImage imageNamed:@"checker.png"];
     UIImageView* checker = [[UIImageView alloc] initWithImage:im];
     checker.contentMode = UIViewContentModeScaleAspectFill;
+    checker.alpha = 0.2;
     self.checkedBackground = checker;
     [self.view addSubview:checker];
 
@@ -69,6 +70,20 @@
         self.selectingRectView.delegate = self;
         [self.mainImageView addSubview:self.selectingRectView];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.checkedBackground.hidden = NO;
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.checkedBackground.hidden = YES;
 }
 
 - (void)viewDidLayoutSubviews

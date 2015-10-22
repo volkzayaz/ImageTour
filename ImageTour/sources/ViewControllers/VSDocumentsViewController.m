@@ -58,7 +58,7 @@
 
 - (void)insertNewObject:(id)sender {
 #warning revert this
-//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
+//    [self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
     [self.imagePicker pickAnImage];
 }
 
@@ -156,15 +156,23 @@
 {
     NSURL *documentURL = VSDocument.newUniqueUrlForDocument;
     VSDocument* newDocument = [VSDocument createNewLocalDocumentInURL:documentURL];
-    [newDocument addImageWithImage:image];
     
     [newDocument saveToURL:documentURL
           forSaveOperation:UIDocumentSaveForCreating
          completionHandler:^(BOOL success) {
-        
-             self.documents = [self.documents arrayByAddingObject:newDocument];
-             [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
-                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+#warning tour #10 does not want to create
+             if(success)
+             {
+                [newDocument addImageWithImage:image];
+                 [newDocument closeWithCompletionHandler:^(BOOL success) {
+                     self.documents = [self.documents arrayByAddingObject:newDocument];
+                     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
+                                           withRowAnimation:UITableViewRowAnimationAutomatic];
+                     
+                 }];
+             }
+             
+             
     }];
 }
 

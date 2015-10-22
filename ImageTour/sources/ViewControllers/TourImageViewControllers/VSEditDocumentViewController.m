@@ -117,8 +117,8 @@
 
 - (void) addEntry {
 #warning revert presentation of image picker
-//    [self.imagePicker pickAnImage];
-    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
+    [self.imagePicker pickAnImage];
+//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath

@@ -114,23 +114,27 @@ CGSize kThumbnailSize = (CGSize){100, 100};
 
     
     NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([TourImage class])
-                                                   inManagedObjectContext:self.managedObjectContext];
+                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
     NSEntityDescription* fullImageEntityDescr = [NSEntityDescription entityForName:NSStringFromClass([FullImage class])
-                                                   inManagedObjectContext:self.managedObjectContext];
+                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
     
     
     TourImage* thumbImage = [[TourImage alloc] initWithEntity:entityDescr
-                          insertIntoManagedObjectContext:self.managedObjectContext];
+                          insertIntoManagedObjectContext:self.managedObjectContext.parentContext];
     FullImage* fullImage = [[FullImage alloc] initWithEntity:fullImageEntityDescr
-                              insertIntoManagedObjectContext:self.managedObjectContext];
+                              insertIntoManagedObjectContext:self.managedObjectContext.parentContext];
     
     thumbImage.fullImage = fullImage;
     thumbImage.thumbnail = thumbnailImageData;
     thumbImage.createdDate = [NSDate date];
+    
     fullImage.imageData = fullImageData;
     
+    
 #warning set up error handling
-    [self.managedObjectContext save:nil];
+    [self.managedObjectContext.parentContext save:nil];
+    [self.managedObjectContext.parentContext refreshObject:thumbImage mergeChanges:NO];
+    [self.managedObjectContext.parentContext refreshObject:fullImage mergeChanges:NO];
     
     return thumbImage;
 }

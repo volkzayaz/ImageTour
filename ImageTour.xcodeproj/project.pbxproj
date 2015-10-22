@@ -20,6 +20,7 @@
 		732756DF1BD9352900B2045E /* VSBaseTourImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		732756E01BD9352900B2045E /* VSEditDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		732756E21BD935C400B2045E /* checker.png in Resources */ = {isa = PBXBuildFile; fileRef = 732756E11BD935C400B2045E /* checker.png */; settings = {ASSET_TAGS = (); }; };
+		732756E61BD94C2A00B2045E /* a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 732756E51BD94C2A00B2045E /* a.jpg */; settings = {ASSET_TAGS = (); }; };
 		734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403161BD671C800B1FFD3 /* UIImage+Resize.m */; settings = {ASSET_TAGS = (); }; };
 		7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */; settings = {ASSET_TAGS = (); }; };
 		7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031E1BD6750400B1FFD3 /* VSDocument.m */; settings = {ASSET_TAGS = (); }; };
@@ -65,6 +66,7 @@
 		732756DC1BD9352900B2045E /* VSEditDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditDocumentViewController.h; sourceTree = "<group>"; };
 		732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditDocumentViewController.m; sourceTree = "<group>"; };
 		732756E11BD935C400B2045E /* checker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checker.png; sourceTree = "<group>"; };
+		732756E51BD94C2A00B2045E /* a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = a.jpg; sourceTree = "<group>"; };
 		734403151BD671C800B1FFD3 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Utils/Categories/UIImage+Resize.h"; sourceTree = "<group>"; };
 		734403161BD671C800B1FFD3 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Utils/Categories/UIImage+Resize.m"; sourceTree = "<group>"; };
 		734403191BD674D900B1FFD3 /* VSDocument+URLManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSDocument+URLManagement.h"; path = "VSDocument/VSDocument+URLManagement.h"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		735BC48B1BD5347B00BD960D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				732756E51BD94C2A00B2045E /* a.jpg */,
 				732756E11BD935C400B2045E /* checker.png */,
 				73897F601BD7D5250048AC61 /* Circle.png */,
 				73897F581BD7B2A60048AC61 /* i.jpeg */,
@@ -355,6 +358,7 @@
 				735BC49E1BD5347B00BD960D /* Assets.xcassets in Resources */,
 				735BC49C1BD5347B00BD960D /* Main.storyboard in Resources */,
 				732756E21BD935C400B2045E /* checker.png in Resources */,
+				732756E61BD94C2A00B2045E /* a.jpg in Resources */,
 				73897F591BD7B2A60048AC61 /* i.jpeg in Resources */,
 				73897F611BD7D5250048AC61 /* Circle.png in Resources */,
 			);

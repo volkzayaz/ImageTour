@@ -22,6 +22,11 @@
 
 @implementation VSImagePicker
 
+- (void)dealloc
+{
+    
+}
+
 - (instancetype)initWithPresentingViewController:(UIViewController *)presentingViewController
 {
     self = [super init];
@@ -49,23 +54,26 @@
                                                                                         message:self.descriptionString
                                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
     
+    __weak typeof (self.imagePicker) weakImagePicker = self.imagePicker;
+    __weak typeof (self.presentingViewController) weakPresenter = self.presentingViewController;
+    
     if([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear])
     {
         [imagePickerAlertController addAction:[UIAlertAction actionWithTitle:@"Camera"
                                                                        style:UIAlertActionStyleDefault
                                                                      handler:^(UIAlertAction * _Nonnull action) {
-                                                                         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                                                                         self.imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-                                                                         [self.imagePicker setCameraDevice:UIImagePickerControllerCameraDeviceRear];
-                                                                         [self.presentingViewController presentViewController:self.imagePicker animated:YES completion:nil];
+                                                                         weakImagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                                         weakImagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+                                                                         [weakImagePicker setCameraDevice:UIImagePickerControllerCameraDeviceRear];
+                                                                         [weakPresenter presentViewController:weakImagePicker animated:YES completion:nil];
         }]];
     }
 
     [imagePickerAlertController addAction:[UIAlertAction actionWithTitle:@"Photo Library"
                                                                    style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                                     [self.presentingViewController presentViewController:self.imagePicker animated:YES completion:nil];
+                                                                     weakImagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                                     [weakPresenter presentViewController:weakImagePicker animated:YES completion:nil];
     }]];
     
     [imagePickerAlertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
