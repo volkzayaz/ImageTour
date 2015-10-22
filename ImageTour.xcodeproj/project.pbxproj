@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		732756891BD8D1DE00B2045E /* VSBaseTourImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756881BD8D1DE00B2045E /* VSBaseTourImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		732756931BD8FA9600B2045E /* VSTourImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756921BD8FA9600B2045E /* VSTourImageView.m */; settings = {ASSET_TAGS = (); }; };
+		732756961BD8FE8B00B2045E /* TransformUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756951BD8FE8B00B2045E /* TransformUtility.m */; settings = {ASSET_TAGS = (); }; };
+		734403141BD662ED00B1FFD3 /* VSImageTourMapData.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403131BD662ED00B1FFD3 /* VSImageTourMapData.m */; settings = {ASSET_TAGS = (); }; };
+		734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403161BD671C800B1FFD3 /* UIImage+Resize.m */; settings = {ASSET_TAGS = (); }; };
+		7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */; settings = {ASSET_TAGS = (); }; };
+		7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031E1BD6750400B1FFD3 /* VSDocument.m */; settings = {ASSET_TAGS = (); }; };
+		734403221BD696AE00B1FFD3 /* VSTourImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403211BD696AE00B1FFD3 /* VSTourImage.m */; settings = {ASSET_TAGS = (); }; };
+		735BC48D1BD5347B00BD960D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC48C1BD5347B00BD960D /* main.m */; };
+		735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC48F1BD5347B00BD960D /* AppDelegate.m */; };
+		735BC49C1BD5347B00BD960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735BC49A1BD5347B00BD960D /* Main.storyboard */; };
+		735BC49E1BD5347B00BD960D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 735BC49D1BD5347B00BD960D /* Assets.xcassets */; };
+		735BC4A11BD5347B00BD960D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735BC49F1BD5347B00BD960D /* LaunchScreen.storyboard */; };
+		735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4B81BD53F0700BD960D /* VSTableCell.m */; settings = {ASSET_TAGS = (); }; };
+		735BC4BE1BD5429800BD960D /* VSEditDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4BD1BD5429800BD960D /* VSEditDocumentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		735BC4C31BD542A400BD960D /* DocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C01BD542A400BD960D /* DocumentsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		735BC4C41BD542A400BD960D /* ImageTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C21BD542A400BD960D /* ImageTourViewController.m */; settings = {ASSET_TAGS = (); }; };
+		735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C61BD5444000BD960D /* VSEditImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		735BC4CF1BD5475000BD960D /* VSImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4CE1BD5475000BD960D /* VSImagePicker.m */; settings = {ASSET_TAGS = (); }; };
+		73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F551BD792400048AC61 /* NSArray+Utils.m */; settings = {ASSET_TAGS = (); }; };
+		73897F591BD7B2A60048AC61 /* i.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 73897F581BD7B2A60048AC61 /* i.jpeg */; settings = {ASSET_TAGS = (); }; };
+		73897F5F1BD7D12F0048AC61 /* VSSelectingRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F5E1BD7D12F0048AC61 /* VSSelectingRectView.m */; settings = {ASSET_TAGS = (); }; };
+		73897F611BD7D5250048AC61 /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 73897F601BD7D5250048AC61 /* Circle.png */; settings = {ASSET_TAGS = (); }; };
+		73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		732756871BD8D1DE00B2045E /* VSBaseTourImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSBaseTourImageViewController.h; sourceTree = "<group>"; };
+		732756881BD8D1DE00B2045E /* VSBaseTourImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSBaseTourImageViewController.m; sourceTree = "<group>"; };
+		732756911BD8FA9600B2045E /* VSTourImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTourImageView.h; sourceTree = "<group>"; };
+		732756921BD8FA9600B2045E /* VSTourImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTourImageView.m; sourceTree = "<group>"; };
+		732756941BD8FE8B00B2045E /* TransformUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransformUtility.h; path = Utils/TransformUtility.h; sourceTree = "<group>"; };
+		732756951BD8FE8B00B2045E /* TransformUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransformUtility.m; path = Utils/TransformUtility.m; sourceTree = "<group>"; };
+		734403121BD662ED00B1FFD3 /* VSImageTourMapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSImageTourMapData.h; sourceTree = "<group>"; };
+		734403131BD662ED00B1FFD3 /* VSImageTourMapData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSImageTourMapData.m; sourceTree = "<group>"; };
+		734403151BD671C800B1FFD3 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Utils/Categories/UIImage+Resize.h"; sourceTree = "<group>"; };
+		734403161BD671C800B1FFD3 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Utils/Categories/UIImage+Resize.m"; sourceTree = "<group>"; };
+		734403191BD674D900B1FFD3 /* VSDocument+URLManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSDocument+URLManagement.h"; path = "VSDocument/VSDocument+URLManagement.h"; sourceTree = "<group>"; };
+		7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSDocument+URLManagement.m"; path = "VSDocument/VSDocument+URLManagement.m"; sourceTree = "<group>"; };
+		7344031D1BD6750400B1FFD3 /* VSDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSDocument.h; path = VSDocument/VSDocument.h; sourceTree = "<group>"; };
+		7344031E1BD6750400B1FFD3 /* VSDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSDocument.m; path = VSDocument/VSDocument.m; sourceTree = "<group>"; };
+		734403201BD696AE00B1FFD3 /* VSTourImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTourImage.h; sourceTree = "<group>"; };
+		734403211BD696AE00B1FFD3 /* VSTourImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTourImage.m; sourceTree = "<group>"; };
+		735BC4881BD5347B00BD960D /* ImageTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		735BC48C1BD5347B00BD960D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		735BC48E1BD5347B00BD960D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		735BC48F1BD5347B00BD960D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		735BC49B1BD5347B00BD960D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		735BC49D1BD5347B00BD960D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		735BC4A01BD5347B00BD960D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		735BC4A21BD5347B00BD960D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		735BC4B71BD53F0700BD960D /* VSTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTableCell.h; sourceTree = "<group>"; };
+		735BC4B81BD53F0700BD960D /* VSTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTableCell.m; sourceTree = "<group>"; };
+		735BC4BC1BD5429800BD960D /* VSEditDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditDocumentViewController.h; sourceTree = "<group>"; };
+		735BC4BD1BD5429800BD960D /* VSEditDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditDocumentViewController.m; sourceTree = "<group>"; };
+		735BC4BF1BD542A400BD960D /* DocumentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentsViewController.h; sourceTree = "<group>"; };
+		735BC4C01BD542A400BD960D /* DocumentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentsViewController.m; sourceTree = "<group>"; };
+		735BC4C11BD542A400BD960D /* ImageTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTourViewController.h; sourceTree = "<group>"; };
+		735BC4C21BD542A400BD960D /* ImageTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTourViewController.m; sourceTree = "<group>"; };
+		735BC4C51BD5444000BD960D /* VSEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditImageViewController.h; sourceTree = "<group>"; };
+		735BC4C61BD5444000BD960D /* VSEditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditImageViewController.m; sourceTree = "<group>"; };
+		735BC4CD1BD5475000BD960D /* VSImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSImagePicker.h; path = ImageTour/sources/Utils/ImagePicker/VSImagePicker.h; sourceTree = SOURCE_ROOT; };
+		735BC4CE1BD5475000BD960D /* VSImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSImagePicker.m; path = ImageTour/sources/Utils/ImagePicker/VSImagePicker.m; sourceTree = SOURCE_ROOT; };
+		73897F541BD792400048AC61 /* NSArray+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Utils.h"; path = "Utils/Categories/NSArray+Utils.h"; sourceTree = "<group>"; };
+		73897F551BD792400048AC61 /* NSArray+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Utils.m"; path = "Utils/Categories/NSArray+Utils.m"; sourceTree = "<group>"; };
+		73897F581BD7B2A60048AC61 /* i.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i.jpeg; sourceTree = "<group>"; };
+		73897F5D1BD7D12F0048AC61 /* VSSelectingRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSSelectingRectView.h; path = ImageTour/sources/view/VSSelectingRectView.h; sourceTree = SOURCE_ROOT; };
+		73897F5E1BD7D12F0048AC61 /* VSSelectingRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSSelectingRectView.m; path = ImageTour/sources/view/VSSelectingRectView.m; sourceTree = SOURCE_ROOT; };
+		73897F601BD7D5250048AC61 /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle.png; sourceTree = "<group>"; };
+		73897F621BD7EF1B0048AC61 /* VSTourImageSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSTourImageSelectionViewController.h; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.h; sourceTree = "<group>"; };
+		73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSTourImageSelectionViewController.m; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.m; sourceTree = "<group>"; };
+		73897F651BD7F1C00048AC61 /* UIViewController+Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Messages.h"; path = "Utils/Categories/UIViewController+Messages.h"; sourceTree = "<group>"; };
+		73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Messages.m"; path = "Utils/Categories/UIViewController+Messages.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		735BC4851BD5347B00BD960D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		734403181BD671CB00B1FFD3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				734403151BD671C800B1FFD3 /* UIImage+Resize.h */,
+				734403161BD671C800B1FFD3 /* UIImage+Resize.m */,
+				73897F541BD792400048AC61 /* NSArray+Utils.h */,
+				73897F551BD792400048AC61 /* NSArray+Utils.m */,
+				73897F651BD7F1C00048AC61 /* UIViewController+Messages.h */,
+				73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		7344031C1BD674DF00B1FFD3 /* VSDocument */ = {
+			isa = PBXGroup;
+			children = (
+				734403191BD674D900B1FFD3 /* VSDocument+URLManagement.h */,
+				7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */,
+				7344031D1BD6750400B1FFD3 /* VSDocument.h */,
+				7344031E1BD6750400B1FFD3 /* VSDocument.m */,
+			);
+			name = VSDocument;
+			sourceTree = "<group>";
+		};
+		735BC47F1BD5347B00BD960D = {
+			isa = PBXGroup;
+			children = (
+				735BC48A1BD5347B00BD960D /* ImageTour */,
+				735BC4891BD5347B00BD960D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		735BC4891BD5347B00BD960D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				735BC4881BD5347B00BD960D /* ImageTour.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		735BC48A1BD5347B00BD960D /* ImageTour */ = {
+			isa = PBXGroup;
+			children = (
+				735BC4A81BD5367F00BD960D /* sources */,
+				735BC48B1BD5347B00BD960D /* Supporting Files */,
+			);
+			path = ImageTour;
+			sourceTree = "<group>";
+		};
+		735BC48B1BD5347B00BD960D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				73897F601BD7D5250048AC61 /* Circle.png */,
+				73897F581BD7B2A60048AC61 /* i.jpeg */,
+				735BC48E1BD5347B00BD960D /* AppDelegate.h */,
+				735BC48F1BD5347B00BD960D /* AppDelegate.m */,
+				735BC49A1BD5347B00BD960D /* Main.storyboard */,
+				735BC49D1BD5347B00BD960D /* Assets.xcassets */,
+				735BC49F1BD5347B00BD960D /* LaunchScreen.storyboard */,
+				735BC4A21BD5347B00BD960D /* Info.plist */,
+				735BC48C1BD5347B00BD960D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		735BC4A81BD5367F00BD960D /* sources */ = {
+			isa = PBXGroup;
+			children = (
+				735BC4CC1BD5470C00BD960D /* Utils */,
+				735BC4BB1BD5427600BD960D /* ViewControllers */,
+				735BC4B51BD53EF600BD960D /* view */,
+				735BC4AD1BD5367F00BD960D /* model */,
+			);
+			path = sources;
+			sourceTree = "<group>";
+		};
+		735BC4AD1BD5367F00BD960D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				7344031C1BD674DF00B1FFD3 /* VSDocument */,
+				734403121BD662ED00B1FFD3 /* VSImageTourMapData.h */,
+				734403131BD662ED00B1FFD3 /* VSImageTourMapData.m */,
+				734403201BD696AE00B1FFD3 /* VSTourImage.h */,
+				734403211BD696AE00B1FFD3 /* VSTourImage.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		735BC4B51BD53EF600BD960D /* view */ = {
+			isa = PBXGroup;
+			children = (
+				73897F5D1BD7D12F0048AC61 /* VSSelectingRectView.h */,
+				73897F5E1BD7D12F0048AC61 /* VSSelectingRectView.m */,
+				735BC4B61BD53EF600BD960D /* cells */,
+				732756911BD8FA9600B2045E /* VSTourImageView.h */,
+				732756921BD8FA9600B2045E /* VSTourImageView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		735BC4B61BD53EF600BD960D /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				735BC4B71BD53F0700BD960D /* VSTableCell.h */,
+				735BC4B81BD53F0700BD960D /* VSTableCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		735BC4BB1BD5427600BD960D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				73897F5C1BD7D0860048AC61 /* SelectRect */,
+				735BC4BF1BD542A400BD960D /* DocumentsViewController.h */,
+				735BC4C01BD542A400BD960D /* DocumentsViewController.m */,
+				735BC4C11BD542A400BD960D /* ImageTourViewController.h */,
+				735BC4C21BD542A400BD960D /* ImageTourViewController.m */,
+				735BC4BC1BD5429800BD960D /* VSEditDocumentViewController.h */,
+				735BC4BD1BD5429800BD960D /* VSEditDocumentViewController.m */,
+				732756871BD8D1DE00B2045E /* VSBaseTourImageViewController.h */,
+				732756881BD8D1DE00B2045E /* VSBaseTourImageViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		735BC4CB1BD544AE00BD960D /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				735BC4CD1BD5475000BD960D /* VSImagePicker.h */,
+				735BC4CE1BD5475000BD960D /* VSImagePicker.m */,
+			);
+			name = ImagePicker;
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		735BC4CC1BD5470C00BD960D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				734403181BD671CB00B1FFD3 /* Categories */,
+				735BC4CB1BD544AE00BD960D /* ImagePicker */,
+				732756941BD8FE8B00B2045E /* TransformUtility.h */,
+				732756951BD8FE8B00B2045E /* TransformUtility.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		73897F5C1BD7D0860048AC61 /* SelectRect */ = {
+			isa = PBXGroup;
+			children = (
+				735BC4C51BD5444000BD960D /* VSEditImageViewController.h */,
+				735BC4C61BD5444000BD960D /* VSEditImageViewController.m */,
+				73897F621BD7EF1B0048AC61 /* VSTourImageSelectionViewController.h */,
+				73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */,
+			);
+			name = SelectRect;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		735BC4871BD5347B00BD960D /* ImageTour */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 735BC4A51BD5347B00BD960D /* Build configuration list for PBXNativeTarget "ImageTour" */;
+			buildPhases = (
+				735BC4841BD5347B00BD960D /* Sources */,
+				735BC4851BD5347B00BD960D /* Frameworks */,
+				735BC4861BD5347B00BD960D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageTour;
+			productName = ImageTour;
+			productReference = 735BC4881BD5347B00BD960D /* ImageTour.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		735BC4801BD5347B00BD960D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = com.286;
+				TargetAttributes = {
+					735BC4871BD5347B00BD960D = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 994D82WT25;
+					};
+				};
+			};
+			buildConfigurationList = 735BC4831BD5347B00BD960D /* Build configuration list for PBXProject "ImageTour" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 735BC47F1BD5347B00BD960D;
+			productRefGroup = 735BC4891BD5347B00BD960D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				735BC4871BD5347B00BD960D /* ImageTour */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		735BC4861BD5347B00BD960D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				735BC4A11BD5347B00BD960D /* LaunchScreen.storyboard in Resources */,
+				735BC49E1BD5347B00BD960D /* Assets.xcassets in Resources */,
+				735BC49C1BD5347B00BD960D /* Main.storyboard in Resources */,
+				73897F591BD7B2A60048AC61 /* i.jpeg in Resources */,
+				73897F611BD7D5250048AC61 /* Circle.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		735BC4841BD5347B00BD960D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				735BC4CF1BD5475000BD960D /* VSImagePicker.m in Sources */,
+				73897F5F1BD7D12F0048AC61 /* VSSelectingRectView.m in Sources */,
+				735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */,
+				7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */,
+				735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */,
+				734403141BD662ED00B1FFD3 /* VSImageTourMapData.m in Sources */,
+				73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */,
+				732756931BD8FA9600B2045E /* VSTourImageView.m in Sources */,
+				735BC48D1BD5347B00BD960D /* main.m in Sources */,
+				734403221BD696AE00B1FFD3 /* VSTourImage.m in Sources */,
+				735BC4C41BD542A400BD960D /* ImageTourViewController.m in Sources */,
+				735BC4BE1BD5429800BD960D /* VSEditDocumentViewController.m in Sources */,
+				73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */,
+				732756891BD8D1DE00B2045E /* VSBaseTourImageViewController.m in Sources */,
+				735BC4C31BD542A400BD960D /* DocumentsViewController.m in Sources */,
+				7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */,
+				734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */,
+				732756961BD8FE8B00B2045E /* TransformUtility.m in Sources */,
+				73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */,
+				735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		735BC49A1BD5347B00BD960D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				735BC49B1BD5347B00BD960D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		735BC49F1BD5347B00BD960D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				735BC4A01BD5347B00BD960D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		735BC4A31BD5347B00BD960D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		735BC4A41BD5347B00BD960D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		735BC4A61BD5347B00BD960D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ImageTour/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.image-tour";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		735BC4A71BD5347B00BD960D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ImageTour/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.image-tour";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		735BC4831BD5347B00BD960D /* Build configuration list for PBXProject "ImageTour" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				735BC4A31BD5347B00BD960D /* Debug */,
+				735BC4A41BD5347B00BD960D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		735BC4A51BD5347B00BD960D /* Build configuration list for PBXNativeTarget "ImageTour" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				735BC4A61BD5347B00BD960D /* Debug */,
+				735BC4A71BD5347B00BD960D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 735BC4801BD5347B00BD960D /* Project object */;
+}
