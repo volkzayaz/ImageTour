@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		732756891BD8D1DE00B2045E /* VSBaseTourImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756881BD8D1DE00B2045E /* VSBaseTourImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		732756931BD8FA9600B2045E /* VSTourImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756921BD8FA9600B2045E /* VSTourImageView.m */; settings = {ASSET_TAGS = (); }; };
 		732756961BD8FE8B00B2045E /* TransformUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756951BD8FE8B00B2045E /* TransformUtility.m */; settings = {ASSET_TAGS = (); }; };
-		734403141BD662ED00B1FFD3 /* VSImageTourMapData.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403131BD662ED00B1FFD3 /* VSImageTourMapData.m */; settings = {ASSET_TAGS = (); }; };
+		732756C21BD91C6600B2045E /* TourImageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 732756C01BD91C6600B2045E /* TourImageModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		732756CF1BD91E3B00B2045E /* ImageLink+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756C41BD91E3B00B2045E /* ImageLink+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		732756D01BD91E3B00B2045E /* ImageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756C61BD91E3B00B2045E /* ImageLink.m */; settings = {ASSET_TAGS = (); }; };
+		732756D11BD91E3B00B2045E /* FullImage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756C81BD91E3B00B2045E /* FullImage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		732756D21BD91E3B00B2045E /* FullImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756CA1BD91E3B00B2045E /* FullImage.m */; settings = {ASSET_TAGS = (); }; };
+		732756D31BD91E3B00B2045E /* TourImage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756CC1BD91E3B00B2045E /* TourImage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		732756D41BD91E3B00B2045E /* TourImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756CE1BD91E3B00B2045E /* TourImage.m */; settings = {ASSET_TAGS = (); }; };
+		732756DE1BD9352900B2045E /* VSImageTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756D91BD9352900B2045E /* VSImageTourViewController.m */; settings = {ASSET_TAGS = (); }; };
+		732756DF1BD9352900B2045E /* VSBaseTourImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		732756E01BD9352900B2045E /* VSEditDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		732756E21BD935C400B2045E /* checker.png in Resources */ = {isa = PBXBuildFile; fileRef = 732756E11BD935C400B2045E /* checker.png */; settings = {ASSET_TAGS = (); }; };
 		734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403161BD671C800B1FFD3 /* UIImage+Resize.m */; settings = {ASSET_TAGS = (); }; };
 		7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */; settings = {ASSET_TAGS = (); }; };
 		7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031E1BD6750400B1FFD3 /* VSDocument.m */; settings = {ASSET_TAGS = (); }; };
-		734403221BD696AE00B1FFD3 /* VSTourImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403211BD696AE00B1FFD3 /* VSTourImage.m */; settings = {ASSET_TAGS = (); }; };
 		735BC48D1BD5347B00BD960D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC48C1BD5347B00BD960D /* main.m */; };
 		735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC48F1BD5347B00BD960D /* AppDelegate.m */; };
 		735BC49C1BD5347B00BD960D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735BC49A1BD5347B00BD960D /* Main.storyboard */; };
 		735BC49E1BD5347B00BD960D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 735BC49D1BD5347B00BD960D /* Assets.xcassets */; };
 		735BC4A11BD5347B00BD960D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735BC49F1BD5347B00BD960D /* LaunchScreen.storyboard */; };
 		735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4B81BD53F0700BD960D /* VSTableCell.m */; settings = {ASSET_TAGS = (); }; };
-		735BC4BE1BD5429800BD960D /* VSEditDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4BD1BD5429800BD960D /* VSEditDocumentViewController.m */; settings = {ASSET_TAGS = (); }; };
-		735BC4C31BD542A400BD960D /* DocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C01BD542A400BD960D /* DocumentsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		735BC4C41BD542A400BD960D /* ImageTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C21BD542A400BD960D /* ImageTourViewController.m */; settings = {ASSET_TAGS = (); }; };
+		735BC4C31BD542A400BD960D /* VSDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C01BD542A400BD960D /* VSDocumentsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C61BD5444000BD960D /* VSEditImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		735BC4CF1BD5475000BD960D /* VSImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4CE1BD5475000BD960D /* VSImagePicker.m */; settings = {ASSET_TAGS = (); }; };
 		73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F551BD792400048AC61 /* NSArray+Utils.m */; settings = {ASSET_TAGS = (); }; };
@@ -35,22 +41,36 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		732756871BD8D1DE00B2045E /* VSBaseTourImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSBaseTourImageViewController.h; sourceTree = "<group>"; };
-		732756881BD8D1DE00B2045E /* VSBaseTourImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSBaseTourImageViewController.m; sourceTree = "<group>"; };
 		732756911BD8FA9600B2045E /* VSTourImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTourImageView.h; sourceTree = "<group>"; };
 		732756921BD8FA9600B2045E /* VSTourImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTourImageView.m; sourceTree = "<group>"; };
 		732756941BD8FE8B00B2045E /* TransformUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransformUtility.h; path = Utils/TransformUtility.h; sourceTree = "<group>"; };
 		732756951BD8FE8B00B2045E /* TransformUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransformUtility.m; path = Utils/TransformUtility.m; sourceTree = "<group>"; };
-		734403121BD662ED00B1FFD3 /* VSImageTourMapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSImageTourMapData.h; sourceTree = "<group>"; };
-		734403131BD662ED00B1FFD3 /* VSImageTourMapData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSImageTourMapData.m; sourceTree = "<group>"; };
+		732756C11BD91C6600B2045E /* TourImageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TourImageModel.xcdatamodel; sourceTree = "<group>"; };
+		732756C31BD91E3B00B2045E /* ImageLink+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ImageLink+CoreDataProperties.h"; path = "CoreData/ImageLink+CoreDataProperties.h"; sourceTree = "<group>"; };
+		732756C41BD91E3B00B2045E /* ImageLink+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ImageLink+CoreDataProperties.m"; path = "CoreData/ImageLink+CoreDataProperties.m"; sourceTree = "<group>"; };
+		732756C51BD91E3B00B2045E /* ImageLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageLink.h; path = CoreData/ImageLink.h; sourceTree = "<group>"; };
+		732756C61BD91E3B00B2045E /* ImageLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageLink.m; path = CoreData/ImageLink.m; sourceTree = "<group>"; };
+		732756C71BD91E3B00B2045E /* FullImage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FullImage+CoreDataProperties.h"; path = "CoreData/FullImage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		732756C81BD91E3B00B2045E /* FullImage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FullImage+CoreDataProperties.m"; path = "CoreData/FullImage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		732756C91BD91E3B00B2045E /* FullImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FullImage.h; path = CoreData/FullImage.h; sourceTree = "<group>"; };
+		732756CA1BD91E3B00B2045E /* FullImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FullImage.m; path = CoreData/FullImage.m; sourceTree = "<group>"; };
+		732756CB1BD91E3B00B2045E /* TourImage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TourImage+CoreDataProperties.h"; path = "CoreData/TourImage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		732756CC1BD91E3B00B2045E /* TourImage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TourImage+CoreDataProperties.m"; path = "CoreData/TourImage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		732756CD1BD91E3B00B2045E /* TourImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourImage.h; path = CoreData/TourImage.h; sourceTree = "<group>"; };
+		732756CE1BD91E3B00B2045E /* TourImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TourImage.m; path = CoreData/TourImage.m; sourceTree = "<group>"; };
+		732756D81BD9352900B2045E /* VSImageTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSImageTourViewController.h; sourceTree = "<group>"; };
+		732756D91BD9352900B2045E /* VSImageTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSImageTourViewController.m; sourceTree = "<group>"; };
+		732756DA1BD9352900B2045E /* VSBaseTourImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSBaseTourImageViewController.h; sourceTree = "<group>"; };
+		732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSBaseTourImageViewController.m; sourceTree = "<group>"; };
+		732756DC1BD9352900B2045E /* VSEditDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditDocumentViewController.h; sourceTree = "<group>"; };
+		732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditDocumentViewController.m; sourceTree = "<group>"; };
+		732756E11BD935C400B2045E /* checker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checker.png; sourceTree = "<group>"; };
 		734403151BD671C800B1FFD3 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Utils/Categories/UIImage+Resize.h"; sourceTree = "<group>"; };
 		734403161BD671C800B1FFD3 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Utils/Categories/UIImage+Resize.m"; sourceTree = "<group>"; };
 		734403191BD674D900B1FFD3 /* VSDocument+URLManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSDocument+URLManagement.h"; path = "VSDocument/VSDocument+URLManagement.h"; sourceTree = "<group>"; };
 		7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSDocument+URLManagement.m"; path = "VSDocument/VSDocument+URLManagement.m"; sourceTree = "<group>"; };
 		7344031D1BD6750400B1FFD3 /* VSDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSDocument.h; path = VSDocument/VSDocument.h; sourceTree = "<group>"; };
 		7344031E1BD6750400B1FFD3 /* VSDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSDocument.m; path = VSDocument/VSDocument.m; sourceTree = "<group>"; };
-		734403201BD696AE00B1FFD3 /* VSTourImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTourImage.h; sourceTree = "<group>"; };
-		734403211BD696AE00B1FFD3 /* VSTourImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTourImage.m; sourceTree = "<group>"; };
 		735BC4881BD5347B00BD960D /* ImageTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		735BC48C1BD5347B00BD960D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		735BC48E1BD5347B00BD960D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,12 +81,8 @@
 		735BC4A21BD5347B00BD960D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		735BC4B71BD53F0700BD960D /* VSTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTableCell.h; sourceTree = "<group>"; };
 		735BC4B81BD53F0700BD960D /* VSTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTableCell.m; sourceTree = "<group>"; };
-		735BC4BC1BD5429800BD960D /* VSEditDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditDocumentViewController.h; sourceTree = "<group>"; };
-		735BC4BD1BD5429800BD960D /* VSEditDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditDocumentViewController.m; sourceTree = "<group>"; };
-		735BC4BF1BD542A400BD960D /* DocumentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentsViewController.h; sourceTree = "<group>"; };
-		735BC4C01BD542A400BD960D /* DocumentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentsViewController.m; sourceTree = "<group>"; };
-		735BC4C11BD542A400BD960D /* ImageTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTourViewController.h; sourceTree = "<group>"; };
-		735BC4C21BD542A400BD960D /* ImageTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTourViewController.m; sourceTree = "<group>"; };
+		735BC4BF1BD542A400BD960D /* VSDocumentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSDocumentsViewController.h; sourceTree = "<group>"; };
+		735BC4C01BD542A400BD960D /* VSDocumentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSDocumentsViewController.m; sourceTree = "<group>"; };
 		735BC4C51BD5444000BD960D /* VSEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditImageViewController.h; sourceTree = "<group>"; };
 		735BC4C61BD5444000BD960D /* VSEditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditImageViewController.m; sourceTree = "<group>"; };
 		735BC4CD1BD5475000BD960D /* VSImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSImagePicker.h; path = ImageTour/sources/Utils/ImagePicker/VSImagePicker.h; sourceTree = SOURCE_ROOT; };
@@ -94,6 +110,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		732756D61BD9345800B2045E /* CoreData Entities */ = {
+			isa = PBXGroup;
+			children = (
+				732756C01BD91C6600B2045E /* TourImageModel.xcdatamodeld */,
+				732756C31BD91E3B00B2045E /* ImageLink+CoreDataProperties.h */,
+				732756C41BD91E3B00B2045E /* ImageLink+CoreDataProperties.m */,
+				732756C51BD91E3B00B2045E /* ImageLink.h */,
+				732756C61BD91E3B00B2045E /* ImageLink.m */,
+				732756C71BD91E3B00B2045E /* FullImage+CoreDataProperties.h */,
+				732756C81BD91E3B00B2045E /* FullImage+CoreDataProperties.m */,
+				732756C91BD91E3B00B2045E /* FullImage.h */,
+				732756CA1BD91E3B00B2045E /* FullImage.m */,
+				732756CB1BD91E3B00B2045E /* TourImage+CoreDataProperties.h */,
+				732756CC1BD91E3B00B2045E /* TourImage+CoreDataProperties.m */,
+				732756CD1BD91E3B00B2045E /* TourImage.h */,
+				732756CE1BD91E3B00B2045E /* TourImage.m */,
+			);
+			name = "CoreData Entities";
+			sourceTree = "<group>";
+		};
+		732756D71BD9352900B2045E /* TourImageViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				732756D81BD9352900B2045E /* VSImageTourViewController.h */,
+				732756D91BD9352900B2045E /* VSImageTourViewController.m */,
+				732756DA1BD9352900B2045E /* VSBaseTourImageViewController.h */,
+				732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */,
+				732756DC1BD9352900B2045E /* VSEditDocumentViewController.h */,
+				732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */,
+			);
+			path = TourImageViewControllers;
+			sourceTree = "<group>";
+		};
 		734403181BD671CB00B1FFD3 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +195,7 @@
 		735BC48B1BD5347B00BD960D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				732756E11BD935C400B2045E /* checker.png */,
 				73897F601BD7D5250048AC61 /* Circle.png */,
 				73897F581BD7B2A60048AC61 /* i.jpeg */,
 				735BC48E1BD5347B00BD960D /* AppDelegate.h */,
@@ -173,11 +223,8 @@
 		735BC4AD1BD5367F00BD960D /* model */ = {
 			isa = PBXGroup;
 			children = (
+				732756D61BD9345800B2045E /* CoreData Entities */,
 				7344031C1BD674DF00B1FFD3 /* VSDocument */,
-				734403121BD662ED00B1FFD3 /* VSImageTourMapData.h */,
-				734403131BD662ED00B1FFD3 /* VSImageTourMapData.m */,
-				734403201BD696AE00B1FFD3 /* VSTourImage.h */,
-				734403211BD696AE00B1FFD3 /* VSTourImage.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -206,15 +253,10 @@
 		735BC4BB1BD5427600BD960D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				732756D71BD9352900B2045E /* TourImageViewControllers */,
 				73897F5C1BD7D0860048AC61 /* SelectRect */,
-				735BC4BF1BD542A400BD960D /* DocumentsViewController.h */,
-				735BC4C01BD542A400BD960D /* DocumentsViewController.m */,
-				735BC4C11BD542A400BD960D /* ImageTourViewController.h */,
-				735BC4C21BD542A400BD960D /* ImageTourViewController.m */,
-				735BC4BC1BD5429800BD960D /* VSEditDocumentViewController.h */,
-				735BC4BD1BD5429800BD960D /* VSEditDocumentViewController.m */,
-				732756871BD8D1DE00B2045E /* VSBaseTourImageViewController.h */,
-				732756881BD8D1DE00B2045E /* VSBaseTourImageViewController.m */,
+				735BC4BF1BD542A400BD960D /* VSDocumentsViewController.h */,
+				735BC4C01BD542A400BD960D /* VSDocumentsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -312,6 +354,7 @@
 				735BC4A11BD5347B00BD960D /* LaunchScreen.storyboard in Resources */,
 				735BC49E1BD5347B00BD960D /* Assets.xcassets in Resources */,
 				735BC49C1BD5347B00BD960D /* Main.storyboard in Resources */,
+				732756E21BD935C400B2045E /* checker.png in Resources */,
 				73897F591BD7B2A60048AC61 /* i.jpeg in Resources */,
 				73897F611BD7D5250048AC61 /* Circle.png in Resources */,
 			);
@@ -326,24 +369,29 @@
 			files = (
 				735BC4CF1BD5475000BD960D /* VSImagePicker.m in Sources */,
 				73897F5F1BD7D12F0048AC61 /* VSSelectingRectView.m in Sources */,
+				732756D11BD91E3B00B2045E /* FullImage+CoreDataProperties.m in Sources */,
+				732756DF1BD9352900B2045E /* VSBaseTourImageViewController.m in Sources */,
 				735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */,
 				7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */,
 				735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */,
-				734403141BD662ED00B1FFD3 /* VSImageTourMapData.m in Sources */,
 				73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */,
+				732756D21BD91E3B00B2045E /* FullImage.m in Sources */,
 				732756931BD8FA9600B2045E /* VSTourImageView.m in Sources */,
 				735BC48D1BD5347B00BD960D /* main.m in Sources */,
-				734403221BD696AE00B1FFD3 /* VSTourImage.m in Sources */,
-				735BC4C41BD542A400BD960D /* ImageTourViewController.m in Sources */,
-				735BC4BE1BD5429800BD960D /* VSEditDocumentViewController.m in Sources */,
+				732756D01BD91E3B00B2045E /* ImageLink.m in Sources */,
+				732756DE1BD9352900B2045E /* VSImageTourViewController.m in Sources */,
 				73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */,
-				732756891BD8D1DE00B2045E /* VSBaseTourImageViewController.m in Sources */,
-				735BC4C31BD542A400BD960D /* DocumentsViewController.m in Sources */,
+				732756D31BD91E3B00B2045E /* TourImage+CoreDataProperties.m in Sources */,
+				732756E01BD9352900B2045E /* VSEditDocumentViewController.m in Sources */,
+				735BC4C31BD542A400BD960D /* VSDocumentsViewController.m in Sources */,
 				7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */,
 				734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */,
+				732756CF1BD91E3B00B2045E /* ImageLink+CoreDataProperties.m in Sources */,
+				732756C21BD91C6600B2045E /* TourImageModel.xcdatamodeld in Sources */,
 				732756961BD8FE8B00B2045E /* TransformUtility.m in Sources */,
 				73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */,
 				735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */,
+				732756D41BD91E3B00B2045E /* TourImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +545,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		732756C01BD91C6600B2045E /* TourImageModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				732756C11BD91C6600B2045E /* TourImageModel.xcdatamodel */,
+			);
+			currentVersion = 732756C11BD91C6600B2045E /* TourImageModel.xcdatamodel */;
+			path = TourImageModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 735BC4801BD5347B00BD960D /* Project object */;
 }

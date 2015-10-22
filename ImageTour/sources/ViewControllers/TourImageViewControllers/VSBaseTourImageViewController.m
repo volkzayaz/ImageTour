@@ -22,6 +22,8 @@
 
 @property (strong, nonatomic, readwrite) VSSelectingRectView* selectingRectView;
 
+@property (weak,   nonatomic, readwrite) UIImageView* checkedBackground;
+
 @end
 
 @implementation VSBaseTourImageViewController
@@ -39,14 +41,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    UIImage* im = [UIImage imageNamed:@"checker.png"];
+    UIImageView* checker = [[UIImageView alloc] initWithImage:im];
+    checker.contentMode = UIViewContentModeScaleAspectFill;
+    self.checkedBackground = checker;
+    [self.view addSubview:checker];
+
     
     VSTourImageView* imageView = [[VSTourImageView alloc] initWithImage:self.displayImage];
     imageView.userInteractionEnabled = YES;
     [self.view addSubview:imageView];
     self.mainImageView = imageView;
 
-#warning add checked background
-    self.view.backgroundColor = [UIColor greenColor];
     
     UITapGestureRecognizer* gr =
     [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -72,6 +79,8 @@
     
     self.mainImageView.frame = (CGRect){0,0,imageSize};
     self.mainImageView.center = self.view.center;
+    
+    self.checkedBackground.frame = self.view.bounds;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size

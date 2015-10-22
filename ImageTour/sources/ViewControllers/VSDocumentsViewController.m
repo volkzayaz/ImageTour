@@ -6,8 +6,8 @@
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
-#import "DocumentsViewController.h"
-#import "ImageTourViewController.h"
+#import "VSDocumentsViewController.h"
+#import "VSImageTourViewController.h"
 #import "VSEditDocumentViewController.h"
 #import "VSImagePicker.h"
 
@@ -15,7 +15,7 @@
 
 #import "VSDocument+URLManagement.h"
 
-@interface DocumentsViewController ()
+@interface VSDocumentsViewController ()
 <
     VSTableCellDelegate,
     VSImagePickerDelegate
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation DocumentsViewController
+@implementation VSDocumentsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,9 +49,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
+    
+#warning refactor to proper closing of the document
+    [self.documentToPresent closeWithCompletionHandler:^(BOOL success) {
+        NSLog(@"Saved %@",self.documentToPresent);
+    }];
 }
 
 - (void)insertNewObject:(id)sender {
+#warning revert this
+//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
     [self.imagePicker pickAnImage];
 }
 
@@ -62,7 +69,7 @@
     
     if ([segueID isEqualToString:@"startTour"]) {
 
-        ImageTourViewController *controller = (ImageTourViewController *)[[segue destinationViewController] topViewController];
+        VSImageTourViewController *controller = (VSImageTourViewController *)[[segue destinationViewController] topViewController];
         controller.document = self.documentToPresent;
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
@@ -147,11 +154,11 @@
 
 - (void) imagePickerDidPickImage:(UIImage *)image
 {
-    NSURL* newDocumentURL = VSDocument.newUniqueUrlForDocument;
-    VSDocument* newDocument = [[VSDocument alloc] initWithFileURL:newDocumentURL];
+    NSURL *documentURL = VSDocument.newUniqueUrlForDocument;
+    VSDocument* newDocument = [VSDocument createNewLocalDocumentInURL:documentURL];
     [newDocument addImageWithImage:image];
     
-    [newDocument saveToURL:newDocumentURL
+    [newDocument saveToURL:documentURL
           forSaveOperation:UIDocumentSaveForCreating
          completionHandler:^(BOOL success) {
         

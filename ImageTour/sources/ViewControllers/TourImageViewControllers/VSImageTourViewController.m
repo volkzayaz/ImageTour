@@ -6,24 +6,24 @@
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
-#import "ImageTourViewController.h"
+#import "VSImageTourViewController.h"
 
-@interface ImageTourViewController () <VSBaseTourImageDelegate>
+@interface VSImageTourViewController () <VSBaseTourImageDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *fromBegginingButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *forwardButton;
 
-@property (nonatomic, strong) VSTourImage* presentedImage;
+@property (nonatomic, strong) FullImage* presentedImage;
 
-@property (nonatomic, strong) NSMutableArray<NSNumber*>* backStack;
-@property (nonatomic, strong) NSMutableArray<NSNumber*>* forwardStack;
+@property (nonatomic, strong) NSMutableArray<NSManagedObjectID*>* backStack;
+@property (nonatomic, strong) NSMutableArray<NSManagedObjectID*>* forwardStack;
 
 @end
 
-@implementation ImageTourViewController
+@implementation VSImageTourViewController
 
-- (void)setPresentedImage:(VSTourImage *)presentedImage {
+- (void)setPresentedImage:(FullImage *)presentedImage {
     _presentedImage = presentedImage;
     
     self.backButton.enabled = self.backStack.count > 0;
@@ -32,12 +32,12 @@
     
     self.displayImage = presentedImage.image;
     
-    for(NSValue* val in [self.document rectsForImage:presentedImage])
+    NSArray* ar = [self.document rectsForImage:presentedImage.tourImage];
+    
+    for(NSValue* val in ar)
     {
         [self displayRectOnMainImage:[val CGRectValue]];
     }
-
-
 }
 
 - (void)viewDidLoad {
@@ -52,42 +52,39 @@
 
 - (void) didTapOnImageAtPoint:(CGPoint)point
 {
-    VSTourImage* nextImage = [self.document nextImageForTappingOnPoint:point
+    FullImage* nextImage = [self.document nextImageForTappingOnPoint:point
                                                                onImage:self.presentedImage];
     if(nextImage)
     {
 #warning optionally present transition animation
-        [self.backStack addObject:self.presentedImage.fileKey];
+        [self.backStack addObject:self.presentedImage.objectID];
         self.presentedImage = nextImage;
-        
     }
 }
 
 - (IBAction)forward:(id)sender {
-    NSNumber* lastFileKey = self.forwardStack.lastObject;
+    NSManagedObjectID* lastFileKey = self.forwardStack.lastObject;
     
     [self.forwardStack removeLastObject];
-    [self.backStack addObject:self.presentedImage.fileKey];
-    
-    VSTourImage* image = [self.document fullScaleImageForFileKey:lastFileKey];
-    self.presentedImage = image;
+    [self.backStack addObject:self.presentedImage.objectID];
+
+    self.presentedImage = [self.document imageForManagedObjectID:lastFileKey];
 }
 
 - (IBAction)back:(id)sender {
-    NSNumber* lastFileKey = self.backStack.lastObject;
+    NSManagedObjectID* lastFileKey = self.backStack.lastObject;
     
     [self.backStack removeLastObject];
-    [self.forwardStack addObject:self.presentedImage.fileKey];
+    [self.forwardStack addObject:self.presentedImage.objectID];
     
-    VSTourImage* image = [self.document fullScaleImageForFileKey:lastFileKey];
-    self.presentedImage = image;
+    self.presentedImage = [self.document imageForManagedObjectID:lastFileKey];
 }
 
 - (IBAction)fromBeggining:(id)sender {
     [self.backStack removeAllObjects];
     [self.forwardStack removeAllObjects];
     
-    VSTourImage* image = self.document.initialImageForTour;
+    FullImage* image = self.document.initialImageForTour;
     self.presentedImage = image;
 }
 

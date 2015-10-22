@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "VSBaseTourImageViewController.h"
-#import "VSTourImage.h"
+#import "TourImage.h"
 
-typedef void(^DidSelectRectCallback)(CGRect selectedRect, VSTourImage* selectedImage);
+typedef void(^DidSelectRectCallback)(CGRect selectedRect, TourImage* selectedImage);
 
 @interface VSEditImageViewController : VSBaseTourImageViewController
 
-@property (nonatomic, strong) NSArray<VSTourImage*>*selectionImages;
+@property (nonatomic, strong) NSFetchedResultsController* selectionImagesController;
 @property (nonatomic, strong) DidSelectRectCallback callback;
 
 

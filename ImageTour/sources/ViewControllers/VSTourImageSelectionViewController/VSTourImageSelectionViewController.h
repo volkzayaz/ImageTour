@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TourImage.h"
 
-#import "VSTourImage.h"
-
-typedef void(^TourImageSelectionCallback)(VSTourImage* selectedTourImage);
+typedef void(^TourImageSelectionCallback)(TourImage* selectedTourImage);
 
 @interface VSTourImageSelectionViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray<VSTourImage*>* dataSource;
+@property (nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
 @property (nonatomic, strong) TourImageSelectionCallback callback;
 
 @end

@@ -16,7 +16,6 @@
 
 @end
 
-#warning change file structure for class and its children
 @interface VSBaseTourImageViewController : UIViewController
 
 @property (nonatomic, weak) id<VSBaseTourImageDelegate> delegate;

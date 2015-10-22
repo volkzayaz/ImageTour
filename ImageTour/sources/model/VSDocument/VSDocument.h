@@ -7,26 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VSTourImage.h"
 
-@interface VSDocument : UIDocument
+#import "TourImage.h"
+#import "FullImage.h"
+
+@interface VSDocument : UIManagedDocument
+
++ (VSDocument*) createNewLocalDocumentInURL:(NSURL*)url;
 
 ///Image from which tour starts
 ///image should also have some name string
-- (VSTourImage*) initialImageForTour;
+- (FullImage*) initialImageForTour;
 
-- (NSArray<VSTourImage*>*) allThumbnails;
+- (NSFetchedResultsController*) allThumbnails;
 
-- (VSTourImage* /*nullable*/) nextImageForTappingOnPoint:(CGPoint)point onImage:(VSTourImage*)tourImage;
-- (VSTourImage*) fullScaleImageForThumbnail:(VSTourImage*)image;
-- (VSTourImage*) fullScaleImageForFileKey:(NSNumber*)fileKey;
+- (FullImage* /*nullable*/) nextImageForTappingOnPoint:(CGPoint)point onImage:(FullImage*)tourImage;
+- (FullImage*) imageForManagedObjectID:(NSManagedObjectID*)objectID;
 
-- (VSTourImage*) addImageWithImage:(UIImage*)image;
+- (TourImage*) addImageWithImage:(UIImage*)image;
 
-- (void) addLinkWithRect:(CGRect)linkRect fromImage:(VSTourImage*)fromImage toImage:(VSTourImage*)toImage;
-- (NSArray<NSValue*>* /*CGRect*/) rectsForImage:(VSTourImage*)image;
+- (void) addLinkWithRect:(CGRect)linkRect fromImage:(TourImage*)fromImage toImage:(TourImage*)toImage;
+- (NSArray<NSValue*>* /*CGRect*/) rectsForImage:(TourImage*)image;
 
-- (void) deleteImage:(VSTourImage*)image;
+- (void) deleteImage:(TourImage*)image;
 
 @end
-adåßß

@@ -12,9 +12,13 @@
 #import "VSImagePicker.h"
 #import "UIViewController+Messages.h"
 
-@interface VSEditDocumentViewController() <VSImagePickerDelegate>
+@interface VSEditDocumentViewController()
+<
+    VSImagePickerDelegate,
+    NSFetchedResultsControllerDelegate
+>
 
-@property (nonatomic, strong) NSMutableArray<VSTourImage*>* dataSource;
+@property (nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
 
 @property (nonatomic, strong) VSImagePicker* imagePicker;
 
@@ -25,9 +29,11 @@
 - (void) configureView {
     self.title = self.document.fileURL.lastPathComponent;
     
-    self.dataSource = self.document.allThumbnails.mutableCopy;
-    [self.tableView reloadData];
+    self.fetchedResultsController = self.document.allThumbnails;
+    self.fetchedResultsController.delegate = self;
+    [self.fetchedResultsController performFetch:nil];
     
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -56,17 +62,20 @@
 #pragma mark - tableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {return 1;}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {return self.dataSource.count;}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.fetchedResultsController.sections[section] numberOfObjects];
+}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {return YES;}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tourImageCell" forIndexPath:indexPath];
     
-    VSTourImage* tourImage = self.dataSource[indexPath.row];
+    TourImage* tourImage = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.imageView.image = tourImage.image;
-    cell.textLabel.text = tourImage.fileKey.stringValue;
+    cell.textLabel.text = tourImage.createdDate.description;
     
     return cell;
 }
@@ -75,47 +84,32 @@
     
     if(editingStyle == UITableViewCellEditingStyleDelete)
     {
-        VSTourImage* tourImage = self.dataSource[indexPath.row];
+        TourImage* tourImage = [self.fetchedResultsController objectAtIndexPath:indexPath];
         
         [self.document deleteImage:tourImage];
-        
-        [self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
-            if(success)
-            {
-                [self.dataSource removeObjectAtIndex:indexPath.row];
-                
-                [tableView deleteRowsAtIndexPaths:@[indexPath]
-                                 withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-        }];
     }
     
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    VSTourImage* originImage = self.dataSource[indexPath.row];
+    TourImage* originImage = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     VSEditImageViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"VSEditImageViewController"];
     
-    VSTourImage* fullScaleImage = [self.document fullScaleImageForThumbnail:originImage];
+    FullImage* fullScaleImage = originImage.fullImage;
     controller.displayImage = fullScaleImage.image;
-    controller.selectionImages = self.dataSource;
+    controller.selectionImagesController = [self.document allThumbnails];
     controller.showsSelectionRect = YES;
     
     __weak typeof(self) wSelf = self;
-    controller.callback = ^(CGRect rect, VSTourImage* destinationImage){
+    controller.callback = ^(CGRect rect, TourImage* destinationImage){
 #warning investigate long time of work
         [wSelf.document addLinkWithRect:rect
                               fromImage:originImage
                                 toImage:destinationImage];
         
-#warning refactor to proper document saving
-        [wSelf.document saveToURL:wSelf.document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
-            [wSelf showInfoMessage:@"New tour link has been added" withTitle:@"Success"];
-        }];
-        
-        
+        [wSelf showInfoMessage:@"New tour link has been added" withTitle:@"Success"];
     };
     
     [self.navigationController pushViewController:controller animated:YES];
@@ -123,26 +117,38 @@
 
 - (void) addEntry {
 #warning revert presentation of image picker
-    [self.imagePicker pickAnImage];
-//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
+//    [self.imagePicker pickAnImage];
+    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
 }
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    if(type == NSFetchedResultsChangeDelete)
+    {
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else if (type == NSFetchedResultsChangeInsert)
+    {
+        [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 
 #pragma - mark ImagePicker delegate 
 
 - (void)imagePickerDidPickImage:(UIImage *)image {
 #warning here we can run out of memmory really quickly
     ///keeping fullscale image in memmory
-    VSTourImage* tourImage = [self.document addImageWithImage:image];
-    
-    
-    [self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
-        if(success)
-        {
-            [self.dataSource addObject:tourImage];
-            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.dataSource.count-1 inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    }];
+    TourImage* tourImage = [self.document addImageWithImage:image];
+//    
+//    [self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+//        if(success)
+//        {
+//            [self.dataSource addObject:tourImage];
+//            
+//        }
+//    }];
 }
 
 @end

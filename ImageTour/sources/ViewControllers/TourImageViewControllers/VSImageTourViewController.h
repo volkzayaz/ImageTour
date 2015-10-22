@@ -11,7 +11,7 @@
 #import "VSBaseTourImageViewController.h"
 #import "VSDocument.h"
 
-@interface ImageTourViewController : VSBaseTourImageViewController
+@interface VSImageTourViewController : VSBaseTourImageViewController
 
 @property (strong, nonatomic) VSDocument* document;
 

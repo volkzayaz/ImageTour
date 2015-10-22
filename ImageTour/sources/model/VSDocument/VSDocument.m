@@ -6,11 +6,13 @@
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
+@import CoreData;
+
 #import "VSDocument.h"
-#import "VSImageTourMapData.h"
 
 #import "UIImage+Resize.h"
-#import "NSArray+Utils.h"
+
+#import "ImageLink.h"
 
 /**
  *  Document structure is the following:
@@ -23,23 +25,11 @@
  * Each full_scale and thumbnail images are encoded as a seperate NSFileWrappers inside root directory
  */
 
-NSString* const kTourMapDataFilename = @"tourMapData";
-NSString* kFullScaleImageKeyForIndex(NSNumber* index) {
-    return [NSString stringWithFormat:@"fullScaleImage_%li",index.integerValue];
-}
-NSString* kThumbnailImageKeyForIndex(NSNumber* index) {
-    return [NSString stringWithFormat:@"thumbnailImage_%li",index.integerValue];
-}
 CGSize kThumbnailSize = (CGSize){100, 100};
 
 @interface VSDocument ()
 
-@property (nonatomic, strong) NSFileWrapper* fileWrapper;
-
-@property (nonatomic, strong) VSImageTourMapData* tourMapData;
-
-@property (nonatomic, strong) NSMutableArray<VSTourImage*>* imagesToSave;
-@property (nonatomic, strong) NSMutableArray<VSTourImage*>* imagesToDelete;
+@property (nonatomic, strong) NSManagedObjectModel *myManagedObjectModel;
 
 @end
 
@@ -50,172 +40,158 @@ CGSize kThumbnailSize = (CGSize){100, 100};
 
     if (self)
     {
-        self.imagesToSave = [NSMutableArray array];
-        self.imagesToDelete = [NSMutableArray array];
-        
-        self.tourMapData = [[VSImageTourMapData alloc] init];
     }
     
     return self;
 }
 
-- (VSTourImage*) initialImageForTour {
-    NSNumber* index = [self.tourMapData initialIndex];
-    
-    return [self fullScaleImageForFileKey:index];
-}
-
-- (VSTourImage *)fullScaleImageForThumbnail:(VSTourImage *)image
++ (VSDocument*) createNewLocalDocumentInURL:(NSURL *)documentURL
 {
-    NSData* fullScaleData = [self decodeObjectFromWrapperWithPreferredFilename:kFullScaleImageKeyForIndex(image.fileKey)];
+    VSDocument* newDocument = [[VSDocument alloc] initWithFileURL:documentURL];
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: @YES,
+                              NSInferMappingModelAutomaticallyOption: @YES};
+    newDocument.persistentStoreOptions = options;
     
-    return [[VSTourImage alloc] initWithImage:[UIImage imageWithData:fullScaleData] fileKey:image.fileKey];
+    return newDocument;
 }
 
-- (VSTourImage*) fullScaleImageForFileKey:(NSNumber *)fileKey
-{
-    return [self fullScaleImageForThumbnail:[[VSTourImage alloc] initWithImage:nil fileKey:fileKey]];
+
+-(NSManagedObjectModel*)myManagedObjectModel {
+    if (_myManagedObjectModel)
+        return _myManagedObjectModel;
+    
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *modelPath = [bundle pathForResource:@"TourImageModel" ofType:@"momd"];
+    _myManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:modelPath]];
+    
+    return _myManagedObjectModel;
 }
 
-- (NSArray<VSTourImage *> *)allThumbnails{
+-(NSManagedObjectModel*)managedObjectModel {
+    return self.myManagedObjectModel;
+}
+
+- (FullImage*) initialImageForTour {
+    NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([FullImage class])
+                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
     
-    return [self.tourMapData.availableImageIndexes map:^id(NSNumber* index) {
-        NSData* thumbnailData = [self decodeObjectFromWrapperWithPreferredFilename:kThumbnailImageKeyForIndex(index)];
-        UIImage* image = [UIImage imageWithData:thumbnailData];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescr];
+    [request setFetchLimit:1];
+    [request setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"tourImage.createdDate" ascending:YES]]];
+
+    return [self.managedObjectContext.parentContext executeFetchRequest:request error:nil].firstObject;
+}
+
+- (NSFetchedResultsController*) allThumbnails{
+    
+    NSString *cacheName = [NSString stringWithFormat:@"VSTourImage-Cache-%@", NSStringFromClass([self class])];
+    
+    ///as per https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/UsingCoreDataWithiCloudPG/GuidanceforDocument-basedApplications/GuidanceforDocument-basedApplications.html
+    ///we should use parent context here
+    NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([TourImage class])
+                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
+    
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescr];
+    [request setFetchBatchSize:20];
+    [request setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"createdDate" ascending:YES]]];
+    
+    NSFetchedResultsController *controller =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                        managedObjectContext:self.managedObjectContext.parentContext
+                                          sectionNameKeyPath:nil
+                                                   cacheName:cacheName];
+    
+    return controller;
+}
+
+- (TourImage*)addImageWithImage:(UIImage *)image {
+    NSData* fullImageData = UIImagePNGRepresentation(image);
+    NSData* thumbnailImageData = UIImagePNGRepresentation([image proportionalResizeForSize:kThumbnailSize]);
+
+    
+    NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([TourImage class])
+                                                   inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription* fullImageEntityDescr = [NSEntityDescription entityForName:NSStringFromClass([FullImage class])
+                                                   inManagedObjectContext:self.managedObjectContext];
+    
+    
+    TourImage* thumbImage = [[TourImage alloc] initWithEntity:entityDescr
+                          insertIntoManagedObjectContext:self.managedObjectContext];
+    FullImage* fullImage = [[FullImage alloc] initWithEntity:fullImageEntityDescr
+                              insertIntoManagedObjectContext:self.managedObjectContext];
+    
+    thumbImage.fullImage = fullImage;
+    thumbImage.thumbnail = thumbnailImageData;
+    thumbImage.createdDate = [NSDate date];
+    fullImage.imageData = fullImageData;
+    
+#warning set up error handling
+    [self.managedObjectContext save:nil];
+    
+    return thumbImage;
+}
+
+- (void)deleteImage:(TourImage *)image {
+    [image.managedObjectContext deleteObject:image];
+    
+    [self.managedObjectContext save:nil];
+}
+
+- (FullImage *)nextImageForTappingOnPoint:(CGPoint)point onImage:(FullImage *)tourImage {
+
+    NSFetchRequest* allLinksRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([ImageLink class])];
+    allLinksRequest.predicate = [NSPredicate predicateWithFormat:@"fromTourImage.fullImage == %@",tourImage];
+    
+    NSArray* allLinks = [self.managedObjectContext executeFetchRequest:allLinksRequest error:nil];
+    
+    for(ImageLink* link in allLinks) {
         
-        return [[VSTourImage alloc] initWithImage:image fileKey:index];
-    }];
+        CGRect rect = [link.linkRect CGRectValue];
+        
+        if(CGRectContainsPoint(rect, point))
+        {
+            return link.toTourImage.fullImage;
+        }
+    }
+    
+    ///no links for point found
+    return nil;
 }
 
-- (VSTourImage*)addImageWithImage:(UIImage *)image {
-    NSNumber* index = [self.tourMapData registerNewImage:image];
-    
-    VSTourImage* tourImage = [[VSTourImage alloc] initWithImage:image fileKey:index];
-    [self.imagesToSave addObject:tourImage];
-    
-    return tourImage;
-}
-
-- (void)deleteImage:(VSTourImage *)image {
-    [self.tourMapData unregisterImageForFileKey:image.fileKey];
-    [self.imagesToDelete addObject:image];
-}
-
-- (VSTourImage *)nextImageForTappingOnPoint:(CGPoint)point onImage:(VSTourImage *)tourImage {
-    
-    NSNumber* index = [self.tourMapData fileIndexForPoint:point
-                                                  onIndex:tourImage.fileKey];
-    
-    if(!index)
-        return nil;
-    
-    NSData* thumbnailData = [self decodeObjectFromWrapperWithPreferredFilename:kFullScaleImageKeyForIndex(index)];
-    UIImage* image = [UIImage imageWithData:thumbnailData];
-    
-    return [[VSTourImage alloc] initWithImage:image fileKey:index];
-}
-
-- (NSArray<NSValue *> *)rectsForImage:(VSTourImage *)image
+- (FullImage *)imageForManagedObjectID:(NSManagedObjectID *)objectID
 {
-    return [self.tourMapData rectsForOriginIndex:image.fileKey];
+    return [self.managedObjectContext objectWithID:objectID];
+}
+
+- (NSArray<NSValue *> *)rectsForImage:(TourImage *)image
+{
+    NSFetchRequest* allLinksRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([ImageLink class])];
+    allLinksRequest.predicate = [NSPredicate predicateWithFormat:@"fromTourImage == %@",image];
+    
+    NSArray* allLinks = [self.managedObjectContext executeFetchRequest:allLinksRequest error:nil];
+
+    return [allLinks valueForKey:@"linkRect"];
 }
 
 - (void)addLinkWithRect:(CGRect)linkRect
-              fromImage:(VSTourImage *)fromImage
-                toImage:(VSTourImage *)toImage
+              fromImage:(TourImage *)fromImage
+                toImage:(TourImage *)toImage
 {
-    [self.tourMapData registerRect:linkRect originIndex:fromImage.fileKey destinationIndex:toImage.fileKey];
-}
-
-#pragma mark - saving data to disk
-
-- (void)encodeObject:(id<NSCoding>)object
-          toWrappers:(NSMutableDictionary *)wrappers
-   preferredFilename:(NSString *)preferredFilename {
-    @autoreleasepool {
-        NSMutableData * data = [NSMutableData data];
-        NSKeyedArchiver * archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-        [archiver encodeObject:object forKey:@"data"];
-        [archiver finishEncoding];
-        NSFileWrapper * wrapper = [[NSFileWrapper alloc] initRegularFileWithContents:data];
-        [wrappers setObject:wrapper forKey:preferredFilename];
-    }
-}
-
-- (id)decodeObjectFromWrapperWithPreferredFilename:(NSString *)preferredFilename {
+    NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([ImageLink class])
+                                                   inManagedObjectContext:self.managedObjectContext];
     
-    NSFileWrapper * fileWrapper = [self.fileWrapper.fileWrappers objectForKey:preferredFilename];
-    if (!fileWrapper) {
-        NSLog(@"Unexpected error: Couldn't find %@ in file wrapper!", preferredFilename);
-        return nil;
-    }
+    ImageLink* link = [[ImageLink alloc] initWithEntity:entityDescr
+                         insertIntoManagedObjectContext:self.managedObjectContext];
     
-    NSData * data = [fileWrapper regularFileContents];
-    NSKeyedUnarchiver * unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    link.linkRect = [NSValue valueWithCGRect:linkRect];
+    link.fromTourImage = [self.managedObjectContext existingObjectWithID:fromImage.objectID error:nil];
+    link.toTourImage = [self.managedObjectContext existingObjectWithID:toImage.objectID error:nil];
     
-    return [unarchiver decodeObjectForKey:@"data"];
-    
-}
-
-
-- (id)contentsForType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
-    
-    ///getting proper file wrapper
-    NSMutableDictionary * wrappers =
-    self.fileWrapper ?
-    self.fileWrapper.fileWrappers.mutableCopy :
-    [NSMutableDictionary dictionary];
-    
-    ////encoding data
-    for(VSTourImage* image in self.imagesToSave)
-    {
-        NSData* fullImageData = UIImagePNGRepresentation(image.image);
-        NSData* thumbnailImageData = UIImagePNGRepresentation([image.image proportionalResizeForSize:kThumbnailSize]);
-        
-        [self encodeObject:fullImageData
-                toWrappers:wrappers
-         preferredFilename:kFullScaleImageKeyForIndex(image.fileKey)];
-        
-        [self encodeObject:thumbnailImageData
-                toWrappers:wrappers
-         preferredFilename:kThumbnailImageKeyForIndex(image.fileKey)];
-    }
-    [self.imagesToSave removeAllObjects];
-    
-    for(VSTourImage* imageToDelete in self.imagesToDelete)
-    {
-        [wrappers removeObjectForKey:kThumbnailImageKeyForIndex(imageToDelete.fileKey)];
-        [wrappers removeObjectForKey:kFullScaleImageKeyForIndex(imageToDelete.fileKey)];
-    }
-    [self.imagesToDelete removeAllObjects];
-    
-    [self encodeObject:self.tourMapData toWrappers:wrappers preferredFilename:kTourMapDataFilename];
-    
-    ///returning encoded data
-    NSFileWrapper * fileWrapper = [[NSFileWrapper alloc] initDirectoryWithFileWrappers:wrappers];
-    
-    self.fileWrapper = fileWrapper;
-    
-    return fileWrapper;
-}
-
-- (BOOL) loadFromContents:(id)contents
-                   ofType:(NSString *)typeName
-                    error:(NSError * _Nullable __autoreleasing *)outError
-{
-    self.fileWrapper = contents;
-    
-    self.tourMapData = [self decodeObjectFromWrapperWithPreferredFilename:kTourMapDataFilename];
-    
-    return YES;
-}
-
-- (BOOL)hasUnsavedChanges {
-    BOOL hasChanges = [super hasUnsavedChanges];
-    
-    BOOL hasUnsavedImages = self.imagesToDelete.count > 0 || self.imagesToSave.count > 0;
-    
-    return hasChanges || hasUnsavedImages;
+    [self.managedObjectContext save:nil];
 }
 
 @end

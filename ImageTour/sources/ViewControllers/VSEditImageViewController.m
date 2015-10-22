@@ -52,10 +52,10 @@
     {
         VSTourImageSelectionViewController* controller = [[VSTourImageSelectionViewController alloc] initWithStyle:UITableViewStylePlain];
         controller.modalPresentationStyle = UIModalPresentationFormSheet;
-        controller.dataSource = self.selectionImages;
+        controller.fetchedResultsController = self.selectionImagesController;
         
         __weak typeof(self) wSelf = self;
-        controller.callback = ^(VSTourImage* image) {
+        controller.callback = ^(TourImage* image) {
             [wSelf dismissViewControllerAnimated:YES completion:^{
                 [wSelf.navigationController popViewControllerAnimated:YES];
                 wSelf.callback(wSelf.selectedRect, image);

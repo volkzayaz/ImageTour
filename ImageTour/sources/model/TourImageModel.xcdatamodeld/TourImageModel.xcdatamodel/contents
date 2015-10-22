@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+    <entity name="FullImage" representedClassName="FullImage" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="tourImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TourImage" inverseName="fullImage" inverseEntity="TourImage" syncable="YES"/>
+    </entity>
+    <entity name="ImageLink" representedClassName="ImageLink" syncable="YES">
+        <attribute name="linkRect" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="fromTourImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TourImage" inverseName="linksOutside" inverseEntity="TourImage" syncable="YES"/>
+        <relationship name="toTourImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TourImage" inverseName="linksInside" inverseEntity="TourImage" syncable="YES"/>
+    </entity>
+    <entity name="TourImage" representedClassName="TourImage" syncable="YES">
+        <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="fullImage" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FullImage" inverseName="tourImage" inverseEntity="FullImage" syncable="YES"/>
+        <relationship name="linksInside" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ImageLink" inverseName="toTourImage" inverseEntity="ImageLink" syncable="YES"/>
+        <relationship name="linksOutside" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ImageLink" inverseName="fromTourImage" inverseEntity="ImageLink" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="TourImage" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="FullImage" positionX="-54" positionY="0" width="128" height="75"/>
+        <element name="ImageLink" positionX="-36" positionY="36" width="128" height="90"/>
+    </elements>
+</model>

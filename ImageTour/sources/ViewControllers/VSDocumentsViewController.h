@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@class ImageTourViewController;
+@class VSImageTourViewController;
 
-@interface DocumentsViewController : UITableViewController
+@interface VSDocumentsViewController : UITableViewController
 
 @end
 
