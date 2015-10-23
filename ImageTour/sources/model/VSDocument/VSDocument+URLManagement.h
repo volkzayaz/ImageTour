@@ -15,5 +15,8 @@
 + (NSArray<VSDocument*>*)localImageTourDocuments;
 
 + (NSURL*) newUniqueUrlForDocument;
++ (NSURL*) urlForTemporaryDocument;
+
++ (BOOL) validateURL: (NSURL*)tourImageDocumentURL;
 
 @end

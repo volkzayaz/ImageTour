@@ -11,7 +11,7 @@
 #import "VSDocument.h"
 
 #import "UIImage+Resize.h"
-
+#import "VSDocument+URLManagement.h"
 #import "ImageLink.h"
 
 /**
@@ -55,6 +55,11 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     return newDocument;
 }
 
+- (void)deleteDocumentWithCompletition:(void (^)(BOOL success))callback
+{
+    
+}
+
 #pragma mark - document import/export
 
 - (NSURL *)prepareForExport
@@ -68,7 +73,7 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     }
     
     NSData* data = [dirWrapper serializedRepresentation];
-    NSURL* exportURL = [[self.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"export.vs"];
+    NSURL* exportURL = [VSDocument urlForTemporaryDocument];
     [data writeToURL:exportURL atomically:YES];
 
     return exportURL;
@@ -78,11 +83,6 @@ CGSize kThumbnailSize = (CGSize){100, 100};
                         toURL:(NSURL *)outputURL
              withCompletition:(VSImportDocumentCallback)callback
 {
-    if(!inputURL)
-    {
-        return;
-    }
-
 #warning - take care of bad code structure
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         NSData* serializedData = [NSData dataWithContentsOfURL:inputURL];
@@ -151,10 +151,8 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     
     NSString *cacheName = [NSString stringWithFormat:@"VSTourImage-Cache-%@", NSStringFromClass([self class])];
     
-    ///as per https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/UsingCoreDataWithiCloudPG/GuidanceforDocument-basedApplications/GuidanceforDocument-basedApplications.html
-    ///we should use parent context here
     NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([TourImage class])
-                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
+                                                   inManagedObjectContext:self.managedObjectContext];
     
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -164,7 +162,7 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     
     NSFetchedResultsController *controller =
     [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                        managedObjectContext:self.managedObjectContext.parentContext
+                                        managedObjectContext:self.managedObjectContext
                                           sectionNameKeyPath:nil
                                                    cacheName:cacheName];
     
@@ -177,15 +175,15 @@ CGSize kThumbnailSize = (CGSize){100, 100};
 
     
     NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([TourImage class])
-                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
+                                                   inManagedObjectContext:self.managedObjectContext];
     NSEntityDescription* fullImageEntityDescr = [NSEntityDescription entityForName:NSStringFromClass([FullImage class])
-                                                   inManagedObjectContext:self.managedObjectContext.parentContext];
+                                                   inManagedObjectContext:self.managedObjectContext];
     
     
     TourImage* thumbImage = [[TourImage alloc] initWithEntity:entityDescr
-                          insertIntoManagedObjectContext:self.managedObjectContext.parentContext];
+                          insertIntoManagedObjectContext:self.managedObjectContext];
     FullImage* fullImage = [[FullImage alloc] initWithEntity:fullImageEntityDescr
-                              insertIntoManagedObjectContext:self.managedObjectContext.parentContext];
+                              insertIntoManagedObjectContext:self.managedObjectContext];
     
     thumbImage.fullImage = fullImage;
     thumbImage.thumbnail = thumbnailImageData;
@@ -193,11 +191,11 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     
     fullImage.imageData = fullImageData;
     
-    
 #warning set up error handling
-    [self.managedObjectContext.parentContext save:nil];
-    [self.managedObjectContext.parentContext refreshObject:thumbImage mergeChanges:NO];
-    [self.managedObjectContext.parentContext refreshObject:fullImage mergeChanges:NO];
+    [self.managedObjectContext save:nil];
+    [self.managedObjectContext refreshObject:thumbImage mergeChanges:NO];
+    [self.managedObjectContext refreshObject:fullImage mergeChanges:NO];
+    [self updateChangeCount:UIDocumentChangeDone];
     
     return thumbImage;
 }

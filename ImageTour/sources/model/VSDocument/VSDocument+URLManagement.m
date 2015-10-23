@@ -9,6 +9,7 @@
 #import "VSDocument+URLManagement.h"
 
 #define FILE_NAME_SEPARATOR @"_"
+#define TEMP_FILE_NAME @"export"
 
 @implementation VSDocument (URLManagement)
 
@@ -32,7 +33,7 @@
                                                [self localImageTourDocuments] valueForKeyPath:@"fileURL.lastPathComponent"] sortedArrayUsingComparator:
                                               ^NSComparisonResult(NSString*  _Nonnull obj1,
                                                                   NSString* _Nonnull obj2) {
-        return [obj1 compare:obj2];
+        return [@([obj1 intValue]) compare:@([obj2 intValue])];
     }];
     
     NSString* biggestIndexName = documentsLastPaths.lastObject;
@@ -44,6 +45,11 @@
     return [self docURLForFileName:[self documentFileNameForIndex:newDocumentIndex]];
 }
 
++ (NSURL *)urlForTemporaryDocument
+{
+    return [[self.localRoot URLByAppendingPathComponent:TEMP_FILE_NAME] URLByAppendingPathExtension:VS_EXTENSION];
+}
+
 + (NSArray<VSDocument*>*)localImageTourDocuments {
     
     NSArray * localDocumentsURLs = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.localRoot
@@ -51,10 +57,12 @@
                                                                                 options:0
                                                                                   error:nil];
     
+    NSString* tempFileLastComponent = [NSString stringWithFormat:@"%@.%@",TEMP_FILE_NAME, VS_EXTENSION];
     NSIndexSet* vsDocsIndexes = [localDocumentsURLs indexesOfObjectsPassingTest:^BOOL(NSURL * fileURL,
                                                                                       NSUInteger idx,
                                                                                       BOOL * _Nonnull stop) {
-        return [[fileURL pathExtension] isEqualToString:VS_EXTENSION];
+         return [[fileURL pathExtension]     isEqualToString:VS_EXTENSION] &
+               ![[fileURL lastPathComponent] isEqualToString:tempFileLastComponent];
     }];
     
     NSMutableArray* answer = [NSMutableArray array];
@@ -65,6 +73,12 @@
     }
     
     return answer.copy;
+}
+
++ (BOOL)validateURL:(NSURL *)tourImageDocumentURL
+{
+    return tourImageDocumentURL != nil &&
+    [tourImageDocumentURL.lastPathComponent.pathExtension isEqualToString:VS_EXTENSION];
 }
 
 @end

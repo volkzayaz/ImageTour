@@ -40,4 +40,6 @@ typedef void(^VSImportDocumentCallback)(VSDocument* newDocument, NSError* error)
 
 - (void) deleteImage:(TourImage*)image;
 
+- (void) deleteDocumentWithCompletition:(void(^)(BOOL success))callback;
+
 @end

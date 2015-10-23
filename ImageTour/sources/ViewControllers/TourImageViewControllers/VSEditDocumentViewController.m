@@ -9,8 +9,11 @@
 #import "VSEditDocumentViewController.h"
 #import "VSEditImageViewController.h"
 
+#import "VSActivityBarItem.h"
 #import "VSImagePicker.h"
+
 #import "UIViewController+Messages.h"
+#import "NSOperationQueue+Sugar.h"
 
 @interface VSEditDocumentViewController()
 <
@@ -21,20 +24,11 @@
 @property (nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
 
 @property (nonatomic, strong) VSImagePicker* imagePicker;
+@property (nonatomic, weak)   VSActivityBarItem* activityItem;
 
 @end
 
 @implementation VSEditDocumentViewController
-
-- (void) configureView {
-    self.title = self.document.fileURL.lastPathComponent;
-    
-    self.fetchedResultsController = self.document.allThumbnails;
-    self.fetchedResultsController.delegate = self;
-    [self.fetchedResultsController performFetch:nil];
-    
-    [self.tableView reloadData];
-}
 
 - (void)viewDidLoad
 {
@@ -49,7 +43,20 @@
     self.imagePicker.delegate = self;
     self.imagePicker.descriptionString = @"Pick new image for your tour";
     
-    [self configureView];
+    self.title = self.document.fileURL.lastPathComponent;
+    
+    self.fetchedResultsController = self.document.allThumbnails;
+    self.fetchedResultsController.delegate = self;
+    [self.fetchedResultsController performFetch:nil];
+    
+    [self.tableView reloadData];
+
+    
+    VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
+    self.activityItem = item;
+    NSArray* rightItems = self.navigationItem.rightBarButtonItems;
+    self.navigationItem.rightBarButtonItems = [rightItems arrayByAddingObject:item];
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -138,7 +145,12 @@
 #pragma - mark ImagePicker delegate 
 
 - (void)imagePickerDidPickImage:(UIImage *)image {
-    [self.document addImageWithImage:image];
+    [self.activityItem startAnimating];
+    [NSOperationQueue dispatchJob:^id{
+        return [self.document addImageWithImage:image];
+    } nextUIBlock:^(id _) {
+        [self.activityItem stopAnimating];
+    }];
 }
 
 @end

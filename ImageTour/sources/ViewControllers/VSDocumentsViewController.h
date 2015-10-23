@@ -13,7 +13,7 @@
 
 @interface VSDocumentsViewController : UITableViewController
 
-@property (nonatomic, strong) NSURL* url;
+@property (nonatomic, strong) NSURL* importedDocumentURL;
 
 @end
 

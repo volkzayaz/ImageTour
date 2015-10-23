@@ -22,12 +22,6 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
-
-    VSDocumentsViewController* doc = [splitViewController.viewControllers.firstObject viewControllers].firstObject;
-    
-    NSURL* receivedDocumentURL = launchOptions[UIApplicationLaunchOptionsURLKey];
-    
-    doc.url = receivedDocumentURL;
     
     return YES;
 }
@@ -55,27 +49,25 @@
     // Saves changes in the application's managed object context before the application terminates.
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options
+- (BOOL)application:(UIApplication *)application
+            openURL:(nonnull NSURL *)url
+            options:(nonnull NSDictionary<NSString *,id> *)options
 {
- UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    VSDocumentsViewController* doc = [splitViewController.viewControllers.firstObject viewControllers].firstObject;
-    
-    doc.url = url;
-
+    [self handleImportedDocumentWithURL:url];
     return YES;
+}
+
+- (void) handleImportedDocumentWithURL:(NSURL*) url
+{
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    VSDocumentsViewController* doc = [splitViewController.viewControllers.firstObject viewControllers].firstObject;
+    doc.importedDocumentURL = url;
 }
 
 #pragma mark - Split view
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
     return YES;
-//    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
-//        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-    
 }
 
 @end

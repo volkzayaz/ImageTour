@@ -69,20 +69,6 @@
     
 }
 
-- (void)setUrl:(NSURL *)url
-{
-    [self.activityItem startAnimating];
-    [VSDocument importDcoumentFromURL:url
-                                toURL:[VSDocument newUniqueUrlForDocument]
-                     withCompletition:^(VSDocument *newDocument, NSError *error) {
-                         
-                         self.documents = [self.documents arrayByAddingObject:newDocument];
-                         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
-                                               withRowAnimation:UITableViewRowAnimationAutomatic];
-                         [self.activityItem stopAnimating];
- }];
-}
-
 - (void)insertNewObject:(id)sender {
 #warning revert this
     //[self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
@@ -125,9 +111,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VSTableCell *cell = [tableView dequeueReusableCellWithIdentifier:VSTableCell.reuseIdentifier
                                                         forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    cell.delegate = self;
+    
+    VSDocument* doc = self.documents[indexPath.row];
+    [cell setDocument:doc];
+    
     return cell;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {return YES;}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,35 +142,32 @@
     }];
 }
 
-- (void)configureCell:(VSTableCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    cell.delegate = self;
-    
-    VSDocument* doc = self.documents[indexPath.row];
-    
-    [cell setDocument:doc];
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.activityItem startAnimating];
+        VSDocument* doc = self.documents[indexPath.row];
+#warning perform proper check before closing
+#warning handle document deleting on contollers that has reference to it
+        [doc closeWithCompletionHandler:^(BOOL success) {
+            if(success)
+            {
+                NSFileManager* fileManager = [[NSFileManager alloc] init];
+                if([fileManager removeItemAtURL:doc.fileURL error:nil])
+                {
+                    [self.activityItem stopAnimating];
+                    self.documents = [self.documents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self != %@",doc]];
+                    [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            }
+        }];
+    }
 }
-
 
 #pragma mark - VSTableCell delegte
 
-- (void)tableCell:(VSTableCell *)cell exportDocument:(VSDocument *)document
-{
-#warning close document before proceeding
-
-    [cell startAnimatingProgress];
-
-    [NSOperationQueue dispatchJob:^id{
-        return document.prepareForExport;
-    } nextUIBlock:^(NSURL* res) {
-        [cell stopAnimationProgress];
-        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:res];
-        self.documentController.UTI = @"com.286.vs";
-        [self.documentController presentOpenInMenuFromRect:cell.exportButton.frame
-                                                    inView:cell.contentView
-                                                  animated:YES];
-    }];
-
-}
 
 - (void)tableCell:(VSTableCell *)cell editDocument:(VSDocument *)document
 {
@@ -198,6 +187,61 @@
 //    }];
 }
 
+#pragma mark - export/import docoments
+
+- (void)tableCell:(VSTableCell *)cell exportDocument:(VSDocument *)document
+{
+#if TARGET_IPHONE_SIMULATOR
+    [self showInfoMessage:@"Document exporting is not supported on simulators. Try installing app on iphone/ipad" withTitle:@"Ouch"];
+#else
+    #warning close document before proceeding
+    [cell startAnimatingProgress];
+    
+    [NSOperationQueue dispatchJob:^id{
+        return document.prepareForExport;
+    } nextUIBlock:^(NSURL* res) {
+        [cell stopAnimationProgress];
+        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:res];
+        self.documentController.UTI = @"com.286.vs";
+        [self.documentController presentOpenInMenuFromRect:cell.exportButton.frame
+                                                    inView:cell.contentView
+                                                  animated:YES];
+    }];
+#endif
+    
+    
+}
+
+- (void)setImportedDocumentURL:(NSURL *)url
+{
+    if(![VSDocument validateURL:url])
+    {
+        return;
+    }
+    
+    [self.activityItem startAnimating];
+    [VSDocument importDcoumentFromURL:url
+                                toURL:[VSDocument newUniqueUrlForDocument]
+                     withCompletition:^(VSDocument *newDocument, NSError *error) {
+                         
+                         if(!error)
+                         {
+                             self.documents = [self.documents arrayByAddingObject:newDocument];
+                             [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
+                                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+                             [self.activityItem stopAnimating];
+                             [self showInfoMessage:[NSString stringWithFormat:@"Your document has been imported"]
+                                         withTitle:@"Success"];
+                         }
+                         else
+                         {
+                             [self showInfoMessage:error.localizedDescription
+                                         withTitle:@"Error importing document"];
+                         }
+                     }];
+}
+
+
 #pragma mark - image picker delegate
 
 - (void) imagePickerDidPickImage:(UIImage *)image
@@ -211,7 +255,6 @@
     [newDocument saveToURL:documentURL
           forSaveOperation:UIDocumentSaveForCreating
          completionHandler:^(BOOL success) {
-#warning tour #10 does not want to create
              if(success)
              {
                  [NSOperationQueue dispatchJob:^id{
