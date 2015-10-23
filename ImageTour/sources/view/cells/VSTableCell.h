@@ -10,19 +10,25 @@
 
 #import "VSDocument.h"
 
+@class VSTableCell;
+
 @protocol VSTableCellDelegate <NSObject>
 
-- (void) startTourWithDocument:(VSDocument*)document;
-- (void) editDocument:(VSDocument*)document;
-- (void) exportDocument:(VSDocument*)document;
+- (void) tableCell:(VSTableCell*)cell editDocument:(VSDocument*)document;
+- (void) tableCell:(VSTableCell*)cell exportDocument:(VSDocument*)document;
 
 @end
 
 @interface VSTableCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *exportButton;
+
 + (NSString*) reuseIdentifier;
 @property (nonatomic, weak) id<VSTableCellDelegate> delegate;
 
 - (void) setDocument:(VSDocument*) document;
+
+- (void) startAnimatingProgress;
+- (void) stopAnimationProgress;
 
 @end

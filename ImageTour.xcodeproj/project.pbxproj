@@ -39,6 +39,8 @@
 		73897F611BD7D5250048AC61 /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 73897F601BD7D5250048AC61 /* Circle.png */; settings = {ASSET_TAGS = (); }; };
 		73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */; settings = {ASSET_TAGS = (); }; };
+		739ED2D81BDA4E8C0044D75D /* VSActivityBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */; settings = {ASSET_TAGS = (); }; };
+		739ED2DB1BDA535C0044D75D /* NSOperationQueue+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +101,10 @@
 		73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSTourImageSelectionViewController.m; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.m; sourceTree = "<group>"; };
 		73897F651BD7F1C00048AC61 /* UIViewController+Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Messages.h"; path = "Utils/Categories/UIViewController+Messages.h"; sourceTree = "<group>"; };
 		73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Messages.m"; path = "Utils/Categories/UIViewController+Messages.m"; sourceTree = "<group>"; };
+		739ED2D61BDA4E8C0044D75D /* VSActivityBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSActivityBarItem.h; sourceTree = "<group>"; };
+		739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSActivityBarItem.m; sourceTree = "<group>"; };
+		739ED2D91BDA535C0044D75D /* NSOperationQueue+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSOperationQueue+Sugar.h"; path = "Utils/Categories/NSOperationQueue+Sugar.h"; sourceTree = "<group>"; };
+		739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSOperationQueue+Sugar.m"; path = "Utils/Categories/NSOperationQueue+Sugar.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,8 @@
 				73897F551BD792400048AC61 /* NSArray+Utils.m */,
 				73897F651BD7F1C00048AC61 /* UIViewController+Messages.h */,
 				73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */,
+				739ED2D91BDA535C0044D75D /* NSOperationQueue+Sugar.h */,
+				739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -240,6 +248,8 @@
 				735BC4B61BD53EF600BD960D /* cells */,
 				732756911BD8FA9600B2045E /* VSTourImageView.h */,
 				732756921BD8FA9600B2045E /* VSTourImageView.m */,
+				739ED2D61BDA4E8C0044D75D /* VSActivityBarItem.h */,
+				739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -381,6 +391,8 @@
 				73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */,
 				732756D21BD91E3B00B2045E /* FullImage.m in Sources */,
 				732756931BD8FA9600B2045E /* VSTourImageView.m in Sources */,
+				739ED2DB1BDA535C0044D75D /* NSOperationQueue+Sugar.m in Sources */,
+				739ED2D81BDA4E8C0044D75D /* VSActivityBarItem.m in Sources */,
 				735BC48D1BD5347B00BD960D /* main.m in Sources */,
 				732756D01BD91E3B00B2045E /* ImageLink.m in Sources */,
 				732756DE1BD9352900B2045E /* VSImageTourViewController.m in Sources */,

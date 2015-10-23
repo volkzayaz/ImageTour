@@ -87,6 +87,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
     if(self.delegate)
     {
         UIImage* editedImage   = (UIImage *) info[UIImagePickerControllerEditedImage];
@@ -99,7 +101,7 @@
         }
     }
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    
     self.imagePicker = nil;
 }
 

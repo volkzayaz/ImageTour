@@ -13,52 +13,53 @@
 @interface VSTableCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 
 @property (nonatomic, strong) VSDocument* doc;
 
-@property (weak, nonatomic) IBOutlet UIButton *exportButton;
+
 
 @end
 
 @implementation VSTableCell
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    if(![MFMailComposeViewController canSendMail])
-    {
-        self.exportButton.hidden = YES;
-    }
-        
-}
-
 + (NSString *)reuseIdentifier{
     return @"com.vsDocumentCell";
 }
 
-- (IBAction)startTourAction:(id)sender {
-    [self.delegate startTourWithDocument:self.doc];
-}
-
 - (IBAction)editDocumentAction:(id)sender {
-    [self.delegate editDocument:self.doc];
+    [self.delegate tableCell:self editDocument:self.doc];
 }
 
 - (IBAction)exportAction:(id)sender {
-    [self.delegate exportDocument:self.doc];
+    [self.delegate tableCell:self exportDocument:self.doc];
 }
 
 - (void)setDocument:(VSDocument *)document{
     self.doc = document;
     self.titleLabel.text = document.fileURL.lastPathComponent;
-//    [document openWithCompletionHandler:^(BOOL success) {
-//        
-//        self.titleLabel.text = document.tourName;
-//        
-//        
-//    }];
+}
+
+- (void) startAnimatingProgress
+{
+    [self.activityIndicator startAnimating];
+    self.widthConstraint.constant = 20.;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.contentView layoutIfNeeded];
+        self.activityIndicator.alpha = 1.;
+    }];
+}
+
+- (void) stopAnimationProgress
+{
+    self.widthConstraint.constant = 0.;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.contentView layoutIfNeeded];
+        self.activityIndicator.alpha = 0.;
+    } completion:^(BOOL finished) {
+        [self.activityIndicator stopAnimating];
+    }];
 }
 
 @end

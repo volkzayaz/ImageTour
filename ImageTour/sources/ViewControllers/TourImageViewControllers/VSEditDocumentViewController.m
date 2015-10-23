@@ -117,8 +117,8 @@
 
 - (void) addEntry {
 #warning revert presentation of image picker
-    [self.imagePicker pickAnImage];
-//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
+    //[self.imagePicker pickAnImage];
+[self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -138,17 +138,7 @@
 #pragma - mark ImagePicker delegate 
 
 - (void)imagePickerDidPickImage:(UIImage *)image {
-#warning here we can run out of memmory really quickly
-    ///keeping fullscale image in memmory
-    TourImage* tourImage = [self.document addImageWithImage:image];
-//    
-//    [self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
-//        if(success)
-//        {
-//            [self.dataSource addObject:tourImage];
-//            
-//        }
-//    }];
+    [self.document addImageWithImage:image];
 }
 
 @end

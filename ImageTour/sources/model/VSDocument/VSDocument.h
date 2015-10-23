@@ -11,9 +11,18 @@
 #import "TourImage.h"
 #import "FullImage.h"
 
+@class VSDocument;
+
+typedef void(^VSImportDocumentCallback)(VSDocument* newDocument, NSError* error);
+
 @interface VSDocument : UIManagedDocument
 
 + (VSDocument*) createNewLocalDocumentInURL:(NSURL*)url;
+
+- (NSURL*) prepareForExport;
++ (void) importDcoumentFromURL:(NSURL*)inputURL
+                         toURL:(NSURL*) outputURL
+              withCompletition:(VSImportDocumentCallback) calback;
 
 ///Image from which tour starts
 ///image should also have some name string

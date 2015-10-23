@@ -55,6 +55,67 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     return newDocument;
 }
 
+#pragma mark - document import/export
+
+- (NSURL *)prepareForExport
+{
+    NSError* error = nil;
+    NSURL *url = self.fileURL;
+    NSFileWrapper *dirWrapper = [[NSFileWrapper alloc] initWithURL:url options:0 error:&error];
+    if (dirWrapper == nil) {
+        NSLog(@"Error creating directory wrapper: %@", error.localizedDescription);
+        return nil;
+    }
+    
+    NSData* data = [dirWrapper serializedRepresentation];
+    NSURL* exportURL = [[self.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"export.vs"];
+    [data writeToURL:exportURL atomically:YES];
+
+    return exportURL;
+}
+
++ (void)importDcoumentFromURL:(NSURL *)inputURL
+                        toURL:(NSURL *)outputURL
+             withCompletition:(VSImportDocumentCallback)callback
+{
+    if(!inputURL)
+    {
+        return;
+    }
+
+#warning - take care of bad code structure
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        NSData* serializedData = [NSData dataWithContentsOfURL:inputURL];
+        NSURL* newDocumentURl = outputURL;
+        
+        NSFileWrapper* fw = [[NSFileWrapper alloc] initWithSerializedRepresentation:serializedData];
+        
+        NSError* er = nil;
+        if(![fw writeToURL:newDocumentURl
+                   options:0
+       originalContentsURL:nil///copying files rather than links to passed URL
+                     error:&er])
+        {
+            if(callback)
+            {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    callback(nil,er);
+                }];
+            }
+        }
+        
+        VSDocument* newDoc = [VSDocument createNewLocalDocumentInURL:newDocumentURl];
+        
+        if(callback)
+        {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                callback(newDoc,nil);
+            }];
+        }
+    }];
+}
+
+#pragma mark - document managament
 
 -(NSManagedObjectModel*)myManagedObjectModel {
     if (_myManagedObjectModel)
@@ -81,7 +142,9 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     [request setFetchLimit:1];
     [request setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"tourImage.createdDate" ascending:YES]]];
 
-    return [self.managedObjectContext.parentContext executeFetchRequest:request error:nil].firstObject;
+    FullImage* image = [self.managedObjectContext.parentContext executeFetchRequest:request error:nil].firstObject;
+    
+    return image;
 }
 
 - (NSFetchedResultsController*) allThumbnails{

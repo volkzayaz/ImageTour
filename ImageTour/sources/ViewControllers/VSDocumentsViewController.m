@@ -12,24 +12,29 @@
 #import "VSImagePicker.h"
 
 #import "VSTableCell.h"
+#import "VSActivityBarItem.h"
 
 #import "VSDocument+URLManagement.h"
 #import "UIViewController+Messages.h"
+
+#import "NSOperationQueue+Sugar.h"
 
 @import MessageUI;
 
 @interface VSDocumentsViewController ()
 <
     VSTableCellDelegate,
-    VSImagePickerDelegate,
-    MFMailComposeViewControllerDelegate
+    VSImagePickerDelegate
 >
 
 @property (nonatomic, strong) VSImagePicker* imagePicker;
+@property (nonatomic, weak)   VSActivityBarItem* activityItem;
 
 @property (nonatomic, strong) NSArray<VSDocument*>* documents;
 
 @property (nonatomic, strong) VSDocument* documentToPresent;
+
+@property (nonatomic, strong) UIDocumentInteractionController* documentController;
 
 @end
 
@@ -37,8 +42,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     self.documents = [VSDocument localImageTourDocuments];
 
@@ -48,6 +51,11 @@
     self.imagePicker = [[VSImagePicker alloc] initWithPresentingViewController:self];
     self.imagePicker.delegate = self;
     self.imagePicker.descriptionString = @"Pick initial image for your tour";
+    
+    VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
+    self.activityItem = item;
+    NSArray* rightItems = self.navigationItem.rightBarButtonItems;
+    self.navigationItem.rightBarButtonItems = [rightItems arrayByAddingObject:item];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,31 +71,21 @@
 
 - (void)setUrl:(NSURL *)url
 {
-    if(!url)
-    {
-        return;
-    }
-    
-    NSData* serializedData = [NSData dataWithContentsOfURL:url];
-    NSURL* newDocumentURl = VSDocument.newUniqueUrlForDocument;
-    
-    NSFileWrapper* fw = [[NSFileWrapper alloc] initWithSerializedRepresentation:serializedData];
-    
-    NSError* er = nil;
-    BOOL a = [fw writeToURL:newDocumentURl options:0 originalContentsURL:url error:&er];
-    
-    VSDocument* newDoc = [[VSDocument alloc] initWithFileURL:newDocumentURl];
-    
-    
-    self.documents = [self.documents arrayByAddingObject:newDoc];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self showInfoMessage:url.absoluteString withTitle:@"Received URL"];
+    [self.activityItem startAnimating];
+    [VSDocument importDcoumentFromURL:url
+                                toURL:[VSDocument newUniqueUrlForDocument]
+                     withCompletition:^(VSDocument *newDocument, NSError *error) {
+                         
+                         self.documents = [self.documents arrayByAddingObject:newDocument];
+                         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
+                         [self.activityItem stopAnimating];
+ }];
 }
 
 - (void)insertNewObject:(id)sender {
 #warning revert this
-//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
+    //[self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
     
     [self.imagePicker pickAnImage];
 }
@@ -131,6 +129,27 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    VSTableCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    VSDocument* selectedDocument = self.documents[indexPath.row];
+    
+    self.documentToPresent = selectedDocument;
+    
+    #warning refactor and take care of document closing
+    [cell startAnimatingProgress];
+    [self.documentToPresent openWithCompletionHandler:^(BOOL success) {
+        if(success)
+        {
+            [cell stopAnimationProgress];
+
+            [self performSegueWithIdentifier:@"startTour" sender:nil];
+        }
+    }];
+}
+
 - (void)configureCell:(VSTableCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.delegate = self;
     
@@ -142,56 +161,26 @@
 
 #pragma mark - VSTableCell delegte
 
-#warning refactor and take care of document closing
-
-- (void)startTourWithDocument:(VSDocument *)document
+- (void)tableCell:(VSTableCell *)cell exportDocument:(VSDocument *)document
 {
-//    [self.documentToPresent closeWithCompletionHandler:^(BOOL success) {
-//        if(success)
-//        {
-    
-//    NSURL* url = [document.fileURL URLByAppendingPathComponent:@"StoreContent"];
-//
-//    NSArray* ar = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:url includingPropertiesForKeys:nil options:0 error:&er];
-//    
-//    NSArray* secAr = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:ar.firstObject includingPropertiesForKeys:nil options:0 error:nil];
-//    
-            self.documentToPresent = document;
-#warning probably put a spinner until document is opened
-            [self.documentToPresent openWithCompletionHandler:^(BOOL success) {
-                if(success)
-                {
-                    [self performSegueWithIdentifier:@"startTour" sender:nil];
-                }
-            }];
-            
-        //}
-//    }];
+#warning close document before proceeding
+
+    [cell startAnimatingProgress];
+
+    [NSOperationQueue dispatchJob:^id{
+        return document.prepareForExport;
+    } nextUIBlock:^(NSURL* res) {
+        [cell stopAnimationProgress];
+        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:res];
+        self.documentController.UTI = @"com.286.vs";
+        [self.documentController presentOpenInMenuFromRect:cell.exportButton.frame
+                                                    inView:cell.contentView
+                                                  animated:YES];
+    }];
+
 }
 
-- (void)exportDocument:(VSDocument *)document
-{
-    NSError* error = nil;
-    NSURL *url = document.fileURL;
-    NSFileWrapper *dirWrapper = [[NSFileWrapper alloc] initWithURL:url options:0 error:&error];
-    if (dirWrapper == nil) {
-        NSLog(@"Error creating directory wrapper: %@", error.localizedDescription);
-        return;
-    }
-    
-    NSData *dirData = [dirWrapper serializedRepresentation];
-    
-    
-    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
-    mailViewController.mailComposeDelegate = self;
-    [mailViewController setSubject:@";Subject Goes Here."];
-    [mailViewController setMessageBody:@";Your message goes here." isHTML:NO];
-    [mailViewController addAttachmentData:dirData mimeType:@"application/x-vs" fileName:document.fileURL.lastPathComponent];
-    
-    [self presentViewController:mailViewController animated:YES completion:nil];
-}
-
-- (void)editDocument:(VSDocument *)document
+- (void)tableCell:(VSTableCell *)cell editDocument:(VSDocument *)document
 {
 //    [self.documentToPresent closeWithCompletionHandler:^(BOOL success) {
 //        if(success)
@@ -213,6 +202,7 @@
 
 - (void) imagePickerDidPickImage:(UIImage *)image
 {
+    [self.activityItem startAnimating];
     NSURL *documentURL = VSDocument.newUniqueUrlForDocument;
     VSDocument* newDocument = [VSDocument createNewLocalDocumentInURL:documentURL];
     
@@ -224,26 +214,19 @@
 #warning tour #10 does not want to create
              if(success)
              {
-                [newDocument addImageWithImage:image];
-                 [newDocument closeWithCompletionHandler:^(BOOL success) {
-                     self.documents = [self.documents arrayByAddingObject:newDocument];
-                     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
-                                           withRowAnimation:UITableViewRowAnimationAutomatic];
-                     
-                 }];
+                 [NSOperationQueue dispatchJob:^id{
+                    return [newDocument addImageWithImage:image];
+                 } nextUIBlock:^(id _) {
+                     [newDocument closeWithCompletionHandler:^(BOOL success) {
+                        [self.activityItem stopAnimating];
+                         self.documents = [self.documents arrayByAddingObject:newDocument];
+                         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
+                                               withRowAnimation:UITableViewRowAnimationAutomatic];
+                         
+                     }];
+                }];
              }
-             
-             
     }];
-}
-
-#pragma mark - mail
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
