@@ -196,6 +196,8 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     link.toTourImage = [self.managedObjectContext existingObjectWithID:toImage.objectID error:nil];
     
     [self.managedObjectContext save:nil];
+    
+
 }
 
 @end

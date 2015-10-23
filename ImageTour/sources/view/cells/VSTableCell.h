@@ -14,6 +14,7 @@
 
 - (void) startTourWithDocument:(VSDocument*)document;
 - (void) editDocument:(VSDocument*)document;
+- (void) exportDocument:(VSDocument*)document;
 
 @end
 

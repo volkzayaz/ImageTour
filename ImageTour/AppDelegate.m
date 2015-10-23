@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "VSDocumentsViewController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -22,7 +23,11 @@
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
 
+    VSDocumentsViewController* doc = [splitViewController.viewControllers.firstObject viewControllers].firstObject;
+    
     NSURL* receivedDocumentURL = launchOptions[UIApplicationLaunchOptionsURLKey];
+    
+    doc.url = receivedDocumentURL;
     
     return YES;
 }
@@ -48,6 +53,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options
+{
+ UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    VSDocumentsViewController* doc = [splitViewController.viewControllers.firstObject viewControllers].firstObject;
+    
+    doc.url = url;
+
+    return YES;
 }
 
 #pragma mark - Split view

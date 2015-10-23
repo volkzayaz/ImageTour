@@ -14,11 +14,15 @@
 #import "VSTableCell.h"
 
 #import "VSDocument+URLManagement.h"
+#import "UIViewController+Messages.h"
+
+@import MessageUI;
 
 @interface VSDocumentsViewController ()
 <
     VSTableCellDelegate,
-    VSImagePickerDelegate
+    VSImagePickerDelegate,
+    MFMailComposeViewControllerDelegate
 >
 
 @property (nonatomic, strong) VSImagePicker* imagePicker;
@@ -54,11 +58,37 @@
     [self.documentToPresent closeWithCompletionHandler:^(BOOL success) {
         NSLog(@"Saved %@",self.documentToPresent);
     }];
+    
+}
+
+- (void)setUrl:(NSURL *)url
+{
+    if(!url)
+    {
+        return;
+    }
+    
+    NSData* serializedData = [NSData dataWithContentsOfURL:url];
+    NSURL* newDocumentURl = VSDocument.newUniqueUrlForDocument;
+    
+    NSFileWrapper* fw = [[NSFileWrapper alloc] initWithSerializedRepresentation:serializedData];
+    
+    NSError* er = nil;
+    BOOL a = [fw writeToURL:newDocumentURl options:0 originalContentsURL:url error:&er];
+    
+    VSDocument* newDoc = [[VSDocument alloc] initWithFileURL:newDocumentURl];
+    
+    
+    self.documents = [self.documents arrayByAddingObject:newDoc];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self showInfoMessage:url.absoluteString withTitle:@"Received URL"];
 }
 
 - (void)insertNewObject:(id)sender {
 #warning revert this
-//    [self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
+//    [self imagePickerDidPickImage:[UIImage imageNamed:@"i.jpeg"]];
+    
     [self.imagePicker pickAnImage];
 }
 
@@ -119,6 +149,13 @@
 //    [self.documentToPresent closeWithCompletionHandler:^(BOOL success) {
 //        if(success)
 //        {
+    
+//    NSURL* url = [document.fileURL URLByAppendingPathComponent:@"StoreContent"];
+//
+//    NSArray* ar = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:url includingPropertiesForKeys:nil options:0 error:&er];
+//    
+//    NSArray* secAr = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:ar.firstObject includingPropertiesForKeys:nil options:0 error:nil];
+//    
             self.documentToPresent = document;
 #warning probably put a spinner until document is opened
             [self.documentToPresent openWithCompletionHandler:^(BOOL success) {
@@ -130,6 +167,28 @@
             
         //}
 //    }];
+}
+
+- (void)exportDocument:(VSDocument *)document
+{
+    NSError* error = nil;
+    NSURL *url = document.fileURL;
+    NSFileWrapper *dirWrapper = [[NSFileWrapper alloc] initWithURL:url options:0 error:&error];
+    if (dirWrapper == nil) {
+        NSLog(@"Error creating directory wrapper: %@", error.localizedDescription);
+        return;
+    }
+    
+    NSData *dirData = [dirWrapper serializedRepresentation];
+    
+    
+    MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+    mailViewController.mailComposeDelegate = self;
+    [mailViewController setSubject:@";Subject Goes Here."];
+    [mailViewController setMessageBody:@";Your message goes here." isHTML:NO];
+    [mailViewController addAttachmentData:dirData mimeType:@"application/x-vs" fileName:document.fileURL.lastPathComponent];
+    
+    [self presentViewController:mailViewController animated:YES completion:nil];
 }
 
 - (void)editDocument:(VSDocument *)document
@@ -157,6 +216,8 @@
     NSURL *documentURL = VSDocument.newUniqueUrlForDocument;
     VSDocument* newDocument = [VSDocument createNewLocalDocumentInURL:documentURL];
     
+#warning investigate memmory leak in image picker
+    
     [newDocument saveToURL:documentURL
           forSaveOperation:UIDocumentSaveForCreating
          completionHandler:^(BOOL success) {
@@ -174,6 +235,15 @@
              
              
     }];
+}
+
+#pragma mark - mail
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

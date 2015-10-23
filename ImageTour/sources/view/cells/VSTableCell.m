@@ -8,6 +8,8 @@
 
 #import "VSTableCell.h"
 
+@import MessageUI;
+
 @interface VSTableCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -15,9 +17,22 @@
 
 @property (nonatomic, strong) VSDocument* doc;
 
+@property (weak, nonatomic) IBOutlet UIButton *exportButton;
+
 @end
 
 @implementation VSTableCell
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    if(![MFMailComposeViewController canSendMail])
+    {
+        self.exportButton.hidden = YES;
+    }
+        
+}
 
 + (NSString *)reuseIdentifier{
     return @"com.vsDocumentCell";
@@ -29,6 +44,10 @@
 
 - (IBAction)editDocumentAction:(id)sender {
     [self.delegate editDocument:self.doc];
+}
+
+- (IBAction)exportAction:(id)sender {
+    [self.delegate exportDocument:self.doc];
 }
 
 - (void)setDocument:(VSDocument *)document{

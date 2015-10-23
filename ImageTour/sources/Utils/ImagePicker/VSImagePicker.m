@@ -22,11 +22,6 @@
 
 @implementation VSImagePicker
 
-- (void)dealloc
-{
-    
-}
-
 - (instancetype)initWithPresentingViewController:(UIViewController *)presentingViewController
 {
     self = [super init];

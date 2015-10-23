@@ -13,5 +13,7 @@
 
 @interface VSDocumentsViewController : UITableViewController
 
+@property (nonatomic, strong) NSURL* url;
+
 @end
 

@@ -98,14 +98,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZX-kd-ZLG">
-                                            <rect key="frame" x="43" y="11" width="476" height="20"/>
+                                            <rect key="frame" x="43" y="12" width="420" height="20"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spH-V1-voS">
-                                            <rect key="frame" x="546" y="6" width="46" height="30"/>
+                                            <rect key="frame" x="546" y="7" width="46" height="30"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="46" id="LN8-JK-1kd"/>
@@ -116,7 +116,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hth-dQ-eck">
-                                            <rect key="frame" x="517" y="6" width="30" height="30"/>
+                                            <rect key="frame" x="517" y="7" width="30" height="30"/>
                                             <animations/>
                                             <state key="normal" title="Edit"/>
                                             <connections>
@@ -130,24 +130,38 @@
                                                 <constraint firstAttribute="width" constant="44" id="drd-5D-Fvl"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7O-8W-Pju">
+                                            <rect key="frame" x="463" y="7" width="46" height="30"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="46" id="SUk-UV-Hdk"/>
+                                            </constraints>
+                                            <state key="normal" title="export"/>
+                                            <connections>
+                                                <action selector="exportAction:" destination="WCw-Qf-5nD" eventType="touchUpInside" id="7N6-fy-s6u"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <animations/>
                                     <constraints>
                                         <constraint firstItem="4ZX-kd-ZLG" firstAttribute="leading" secondItem="gzk-GI-8zB" secondAttribute="trailing" constant="-1" id="7uh-rM-WIG"/>
+                                        <constraint firstItem="hth-dQ-eck" firstAttribute="leading" secondItem="E7O-8W-Pju" secondAttribute="trailing" constant="8" id="8TW-6D-w6b"/>
                                         <constraint firstItem="gzk-GI-8zB" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="topMargin" constant="-8" id="DZ1-YC-nXX"/>
+                                        <constraint firstItem="E7O-8W-Pju" firstAttribute="centerY" secondItem="hth-dQ-eck" secondAttribute="centerY" id="Far-cx-Ajb"/>
                                         <constraint firstItem="gzk-GI-8zB" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" constant="-8" id="JLh-vs-AmM"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="spH-V1-voS" secondAttribute="trailing" id="NCc-yV-WUZ"/>
                                         <constraint firstItem="spH-V1-voS" firstAttribute="centerY" secondItem="4ZX-kd-ZLG" secondAttribute="centerY" id="U05-WQ-PYr"/>
                                         <constraint firstItem="spH-V1-voS" firstAttribute="leading" secondItem="hth-dQ-eck" secondAttribute="trailing" constant="-1" id="XLd-wO-bYn"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="gzk-GI-8zB" secondAttribute="bottom" constant="-8.5" id="d1I-B0-Piw"/>
                                         <constraint firstItem="4ZX-kd-ZLG" firstAttribute="centerY" secondItem="37f-cq-3Eg" secondAttribute="centerY" id="gAp-W6-DrW"/>
-                                        <constraint firstItem="hth-dQ-eck" firstAttribute="leading" secondItem="4ZX-kd-ZLG" secondAttribute="trailing" constant="-2" id="hXt-q3-3jN"/>
+                                        <constraint firstItem="E7O-8W-Pju" firstAttribute="leading" secondItem="4ZX-kd-ZLG" secondAttribute="trailing" id="sdY-B2-jIA"/>
                                         <constraint firstItem="hth-dQ-eck" firstAttribute="centerY" secondItem="4ZX-kd-ZLG" secondAttribute="centerY" id="tQA-Nt-V0R"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="exportButton" destination="E7O-8W-Pju" id="C6M-2u-rx1"/>
                                     <outlet property="thumbnailImageView" destination="gzk-GI-8zB" id="GSS-J2-zkL"/>
                                     <outlet property="titleLabel" destination="4ZX-kd-ZLG" id="uQ4-lH-HiO"/>
                                 </connections>

@@ -67,13 +67,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ImageTour/sources/Utils/ImagePicker/VSImagePicker.m"
-            timestampString = "467227009.070274"
+            filePath = "ImageTour/sources/ViewControllers/VSDocumentsViewController.m"
+            timestampString = "467285507.675992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "-dealloc"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "-exportDocument:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageTour/sources/ViewControllers/VSDocumentsViewController.m"
+            timestampString = "467285507.675992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-setUrl:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,18 +7,14 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
-			<key>CFBundleTypeName</key>
-			<string>Tour Image</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.286.tour-image</string>
 			</array>
+			<key>CFBundleTypeName</key>
+			<string>Tour Image data</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -73,21 +69,19 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
-			<key>UITypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>vs</string>
-				</array>
-			</dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
 			</array>
-			<key>UTTypeDescription</key>
-			<string>Tour Image</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.286.tour-image</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.mime-type</key>
+				<string>application/x-vs</string>
+				<key>public.filename-extension</key>
+				<string>vs</string>
+			</dict>
 		</dict>
 	</array>
 </dict>
