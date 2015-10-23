@@ -55,11 +55,6 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     return newDocument;
 }
 
-- (void)deleteDocumentWithCompletition:(void (^)(BOOL success))callback
-{
-    
-}
-
 #pragma mark - document import/export
 
 - (NSURL *)prepareForExport
@@ -169,7 +164,9 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     return controller;
 }
 
-- (TourImage*)addImageWithImage:(UIImage *)image {
+- (TourImage*)addImageWithImage:(UIImage *)inputImage {
+    UIImage* image = [inputImage normalizedImage];
+    
     NSData* fullImageData = UIImagePNGRepresentation(image);
     NSData* thumbnailImageData = UIImagePNGRepresentation([image proportionalResizeForSize:kThumbnailSize]);
 

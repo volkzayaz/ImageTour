@@ -18,4 +18,7 @@
  */
 - (CGSize) niceSizeToFitInSize:(CGSize)size;
 
+/// fix our png represented images in terms of rotation
+- (UIImage*) normalizedImage;
+
 @end
