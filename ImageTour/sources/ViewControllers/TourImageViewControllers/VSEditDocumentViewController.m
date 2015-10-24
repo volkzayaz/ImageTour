@@ -39,9 +39,39 @@
     [self nullifyDocument];
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if(self)
+    {
+        self.imagePicker = [[VSImagePicker alloc] initWithPresentingViewController:self];
+        self.imagePicker.delegate = self;
+        self.imagePicker.descriptionString = @"Pick new image for your tour";
+        
+        self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification
+                                                                          object:self.document
+                                                                           queue:[NSOperationQueue mainQueue]
+                                                                      usingBlock:^(NSNotification * _Nonnull note) {
+                                                                          if(self.document.documentState == UIDocumentStateClosed)
+                                                                          {
+                                                                              [self nullifyDocument];
+                                                                          }
+                                                                      }];
+    }
+    
+    return self;
+}
+
+#pragma mark - view life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.fetchedResultsController = self.document.allThumbnails;
+    self.fetchedResultsController.delegate = self;
+    [self.fetchedResultsController performFetch:nil];
     
     UIBarButtonItem* addEntryButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                     target:self
@@ -49,28 +79,7 @@
     self.navigationItem.rightBarButtonItem = addEntryButton;
     self.addEntryItem = addEntryButton;
     
-    self.imagePicker = [[VSImagePicker alloc] initWithPresentingViewController:self];
-    self.imagePicker.delegate = self;
-    self.imagePicker.descriptionString = @"Pick new image for your tour";
-    
     self.title = self.document.fileURL.lastPathComponent;
-    
-    self.fetchedResultsController = self.document.allThumbnails;
-    self.fetchedResultsController.delegate = self;
-    [self.fetchedResultsController performFetch:nil];
-    
-    [self.tableView reloadData];
-
-    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification
-                                                                      object:self.document
-                                                                       queue:[NSOperationQueue mainQueue]
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      if(self.document.documentState == UIDocumentStateClosed)
-                                                                      {
-                                                                          [self nullifyDocument];
-                                                                      }
-                                                                  }];
-
     
     VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
     self.activityItem = item;
@@ -85,17 +94,6 @@
     [self showHintOnceWithTitle:@"Edit tour" message:@"Це екран редагування турів. Тут відображаються усі картинки, які ви додали в тур. Додати нову картинку можна за допомогою кнопки '+'. Для видалення картинки зробіть swipe вліво на ній. Пам'ятайте, ваш тур завжди починатиметься з картинки, яка йде першою в списку."];
     
     [self showHintOnceWithTitle:@"Edit tour" message:@"Щоб створити нове посилання між картинками клацніть на картинці, яка буде містити це посилання."];
-}
-
-
-- (void) nullifyDocument
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
-    self.document = nil;
-    self.addEntryItem.enabled = NO;
-    
-    self.fetchedResultsController = nil;
-    [self.tableView reloadData];
 }
 
 #pragma mark - tableView
@@ -143,8 +141,7 @@
     
     VSEditImageViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"VSEditImageViewController"];
     
-    FullImage* fullScaleImage = originImage.fullImage;
-    controller.displayImage = fullScaleImage.image;
+    controller.displayImage = originImage.fullImage.image;
     controller.selectionImagesController = [self.document allThumbnails];
     controller.showsSelectionRect = YES;
     
@@ -163,9 +160,20 @@
 #pragma mark - actions
 
 - (void) addEntry {
-#warning revert presentation of image picker
     [self.imagePicker pickAnImage];
 }
+
+- (void) nullifyDocument
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+    self.document = nil;
+    self.addEntryItem.enabled = NO;
+    
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
+}
+
+#pragma mark - fetched results controller
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
@@ -177,14 +185,6 @@
     {
         [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
-- (void) didCloseDocument:(VSDocument *)doc
-{
-    if(doc == self.document)
-    {
-        self.document = nil;
     }
 }
 

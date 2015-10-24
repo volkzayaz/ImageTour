@@ -7,14 +7,14 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.286.tour-image</string>
-			</array>
 			<key>CFBundleTypeName</key>
 			<string>Tour Image data</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.286.tour-image</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -58,6 +58,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -77,10 +78,10 @@
 			<string>com.286.tour-image</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>public.mime-type</key>
-				<string>application/x-vs</string>
 				<key>public.filename-extension</key>
 				<string>vs</string>
+				<key>public.mime-type</key>
+				<string>application/x-vs</string>
 			</dict>
 		</dict>
 	</array>

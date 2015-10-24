@@ -7,7 +7,7 @@
 //
 
 #import "VSTourImageView.h"
-#import "TransformUtility.h"
+#import "VSTransformUtility.h"
 
 @interface VSTourImageView()
 
@@ -42,9 +42,9 @@
     {
         UIView* view = self.attentionViews[val];
         
-        view.frame = [TransformUtility transformedRectFromRect:val.CGRectValue
-                                                    originSize:self.image.size
-                                               destinationSize:self.frame.size];
+        view.frame = [VSTransformUtility transformedRectFromRect:val.CGRectValue
+                                                      originSize:self.image.size
+                                                 destinationSize:self.frame.size];
     }
 }
 

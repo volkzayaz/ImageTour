@@ -13,7 +13,7 @@
 
 #import "UIImage+Resize.h"
 
-#import "TransformUtility.h"
+#import "VSTransformUtility.h"
 
 @interface VSBaseTourImageViewController () <VSSelectingViewProtocol>
 
@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIImage* im = [UIImage imageNamed:@"checker.png"];
+    UIImage* im = [UIImage imageNamed:@"checker"];
     UIImageView* checker = [[UIImageView alloc] initWithImage:im];
     checker.contentMode = UIViewContentModeScaleAspectFill;
     checker.alpha = 0.2;
@@ -108,9 +108,9 @@
     CGSize upcomingImageSize = [self.displayImage niceSizeToFitInSize:size];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.selectingRectView.frame = [TransformUtility transformedRectFromRect:selectionViewFrame
-                                                                      originSize:viewSize
-                                                                 destinationSize:upcomingImageSize];
+        self.selectingRectView.frame = [VSTransformUtility transformedRectFromRect:selectionViewFrame
+                                                                        originSize:viewSize
+                                                                   destinationSize:upcomingImageSize];
         self.selectedRect = self.selectingRectView.frame;
     } completion:nil];
     
@@ -122,7 +122,7 @@
     CGSize viewSize = self.mainImageView.frame.size;
     CGSize imageSize = self.displayImage.size;
     
-    self.selectedRect = [TransformUtility transformedRectFromRect:selectionViewFrame
+    self.selectedRect = [VSTransformUtility transformedRectFromRect:selectionViewFrame
                                                        originSize:viewSize
                                                   destinationSize:imageSize];
 }
@@ -142,7 +142,7 @@
         CGSize viewSize = self.mainImageView.frame.size;
         CGSize imageSize = self.displayImage.size;
 
-        [self.delegate didTapOnImageAtPoint:[TransformUtility transformedPoint:location
+        [self.delegate didTapOnImageAtPoint:[VSTransformUtility transformedPoint:location
                                                                     originSize:viewSize
                                                                destinationSize:imageSize]];
     }

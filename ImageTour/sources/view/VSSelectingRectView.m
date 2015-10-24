@@ -36,10 +36,10 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     
     if(self)
     {
-        self.upperLeftThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Circle.png"]];
-        self.upperRightThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Circle.png"]];
-        self.bottomLeftThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Circle.png"]];
-        self.bottomRightThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Circle.png"]];
+        self.upperLeftThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
+        self.upperRightThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
+        self.bottomLeftThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
+        self.bottomRightThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
         
         [self addSubview:self.upperRightThumb];
         [self addSubview:self.upperLeftThumb];

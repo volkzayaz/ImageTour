@@ -39,18 +39,34 @@
 
 @implementation VSDocumentsViewController
 
+- (instancetype) initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if(self)
+    {
+        self.documents = [VSDocument localImageTourDocuments];
+        if(self.documents.count == 0)
+        {
+            [self addExampleDocument];
+        }
+        
+        self.imagePicker = [[VSImagePicker alloc] initWithPresentingViewController:self];
+        self.imagePicker.delegate = self;
+        self.imagePicker.descriptionString = @"Pick initial image for your tour";
+    }
+    
+    return self;
+}
+
+#pragma mark - view lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.documents = [VSDocument localImageTourDocuments];
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
 
-    self.imagePicker = [[VSImagePicker alloc] initWithPresentingViewController:self];
-    self.imagePicker.delegate = self;
-    self.imagePicker.descriptionString = @"Pick initial image for your tour";
-    
     VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
     self.activityItem = item;
     NSArray* rightItems = self.navigationItem.rightBarButtonItems;
@@ -70,14 +86,21 @@
     [self showHintOnceWithTitle:@"Image Tours" message:@"Тут відображається список усіх наявних документів-турів. Додати один тур можна за допомогою кнопки '+'. При додаванні туру ви маєте обрати стартову картинку для нього."];
     
     [self showHintOnceWithTitle:@"Image Tours" message:@"Розпочати перегляд тура можна клацнувши на комірку з ним. Щоб редагувати тур клацніть 'Edit'. Для видалення тура, зробіть swipe вліво на ньому."];
-    
-    
 }
 
-- (void)insertNewObject:(id)sender {
-#warning revert this
-    //[self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
-    
+#pragma mark - actions
+
+- (void) addExampleDocument
+{
+    NSURL* exampleDocURL = [VSDocument newUniqueUrlForDocument];
+    [VSDocument importDcoumentFromURL:[[NSBundle mainBundle] URLForResource:@"Example_Tour"
+                                                              withExtension:@"vs"]
+                                toURL:exampleDocURL
+                     withCompletition:nil];
+    self.documents = @[[[VSDocument alloc] initWithFileURL:exampleDocURL]];
+}
+
+- (void)insertNewObject {
     [self.imagePicker pickAnImage];
 }
 
@@ -210,12 +233,9 @@
 - (void)setImportedDocumentURL:(NSURL *)url
 {
     if(![VSDocument validateURL:url])
-    {
         return;
-    }
     
     [self.activityItem startAnimating];
-#warning simplify callback hell
     [VSDocument importDcoumentFromURL:url
                                 toURL:[VSDocument newUniqueUrlForDocument]
                      withCompletition:^(VSDocument *newDocument, NSError *error) {
@@ -225,13 +245,16 @@
                              self.documents = [self.documents arrayByAddingObject:newDocument];
                              [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
                                                    withRowAnimation:UITableViewRowAnimationAutomatic];
-                             [self.activityItem stopAnimating];
                              
-                             [[VSDocumentStateManager sharedInstance] ensureOpenedDocument:newDocument andDo:^(VSDocument *doc) {
+                             [[VSDocumentStateManager sharedInstance]
+                                    ensureOpenedDocument:newDocument
+                                                   andDo:^(VSDocument *doc) {
+                                 [self.activityItem stopAnimating];
                                  [self performSegueWithIdentifier:@"startTour" sender:nil];
-                                 [self showInfoMessage:[NSString stringWithFormat:@"Your document has been imported"]
-                                             withTitle:@"Success"];
+                                 
                              }];
+                             [self showInfoMessage:@"Your document has been imported"
+                                         withTitle:@"Success"];
                          }
                          else
                          {
@@ -241,14 +264,11 @@
                      }];
 }
 
-
 #pragma mark - image picker delegate
 
 - (void) imagePickerDidPickImage:(UIImage *)image
 {
     [self.activityItem startAnimating];
-    
-#warning investigate memmory leak in image picker
     
     [[VSDocumentStateManager sharedInstance] explicitlyCreateDocumetWithCallback:^(VSDocument *newDocument) {
         [NSOperationQueue dispatchJob:^id{
@@ -259,7 +279,7 @@
             self.documents = [self.documents arrayByAddingObject:newDocument];
             [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.documents.count-1 inSection:0]]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
-            //self.documentToPresent = newDocument;
+
             [self performSegueWithIdentifier:@"showEditDocument" sender:nil];
         }];
     }];
