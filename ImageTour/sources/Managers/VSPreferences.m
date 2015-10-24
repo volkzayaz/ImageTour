@@ -8,26 +8,29 @@
 
 #import "VSPreferences.h"
 
+NSString* const kShowHintsKey = @"com.286.showHints-preference";
+NSString* const kShowSelectionKey = @"com.286.showSelections-preference";
+
 @implementation VSPreferences
 
 + (void)load
 {
     [super load];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"com.286.showHints-preference" : @YES,
-                                                              @"com.286.showSelections-preference" : @YES
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kShowHintsKey     : @YES,
+                                                              kShowSelectionKey : @YES
                                                               }];
 }
 
 + (BOOL)showsHintsOnViews
 {
-    BOOL a = [[NSUserDefaults standardUserDefaults] boolForKey:@"com.286.showHints-preference"];
+    BOOL a = [[NSUserDefaults standardUserDefaults] boolForKey:kShowHintsKey];
     return a;
 }
 
 + (BOOL)showsSelectionAreas
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"com.286.showSelections-preference"];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kShowSelectionKey];
 }
 
 @end

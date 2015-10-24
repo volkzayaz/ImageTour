@@ -28,6 +28,8 @@
     return [self.localRoot URLByAppendingPathComponent:filename];
 }
 
+#pragma mark - interface implementation
+
 + (NSURL*) newUniqueUrlForDocument {
     NSArray<NSString*>* documentsLastPaths = [[
                                                [self localImageTourDocuments] valueForKeyPath:@"fileURL.lastPathComponent"] sortedArrayUsingComparator:

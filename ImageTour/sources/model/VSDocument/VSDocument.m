@@ -7,43 +7,22 @@
 //
 
 @import CoreData;
-
 #import "VSDocument.h"
+#import "ImageLink.h"
 
 #import "UIImage+Resize.h"
 #import "VSDocument+URLManagement.h"
-#import "ImageLink.h"
-
-/**
- *  Document structure is the following:
- *                                    Root directory
- *                                /        |           \
- *                               /         |            \
- *                    tourMapData     image_thumbnails..  full_scale_image...
- * obj-c types  VSImageTourMapData*   UIImage               UIImage
- *
- * Each full_scale and thumbnail images are encoded as a seperate NSFileWrappers inside root directory
- */
+#import "NSOperationQueue+Sugar.h"
 
 CGSize kThumbnailSize = (CGSize){100, 100};
 
 @interface VSDocument ()
 
-@property (nonatomic, strong) NSManagedObjectModel *myManagedObjectModel;
+@property (nonatomic, strong) NSManagedObjectModel *vsManagedObjectModel;
 
 @end
 
 @implementation VSDocument
-
-- (instancetype)initWithFileURL:(NSURL *)url {
-    self = [super initWithFileURL:url];
-
-    if (self)
-    {
-    }
-    
-    return self;
-}
 
 + (VSDocument*) createNewLocalDocumentInURL:(NSURL *)documentURL
 {
@@ -78,54 +57,50 @@ CGSize kThumbnailSize = (CGSize){100, 100};
                         toURL:(NSURL *)outputURL
              withCompletition:(VSImportDocumentCallback)callback
 {
-#warning - take care of bad code structure
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+    [NSOperationQueue dispatchJob:^id{
         NSData* serializedData = [NSData dataWithContentsOfURL:inputURL];
         NSURL* newDocumentURl = outputURL;
         
         NSFileWrapper* fw = [[NSFileWrapper alloc] initWithSerializedRepresentation:serializedData];
         
-        NSError* er = nil;
+        NSError* error = nil;
         if(![fw writeToURL:newDocumentURl
                    options:0
        originalContentsURL:nil///copying files rather than links to passed URL
-                     error:&er])
+                     error:&error])
         {
-            if(callback)
-            {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    callback(nil,er);
-                }];
-            }
+            return error;
         }
         
-        VSDocument* newDoc = [VSDocument createNewLocalDocumentInURL:newDocumentURl];
-        
+        return [VSDocument createNewLocalDocumentInURL:newDocumentURl];
+    } nextUIBlock:^(id res) {
         if(callback)
         {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                callback(newDoc,nil);
-            }];
+            if ([res isKindOfClass:[NSError class]])
+                callback(nil,res);
+            
+            callback(res, nil);
         }
     }];
 }
 
-#pragma mark - document managament
-
--(NSManagedObjectModel*)myManagedObjectModel {
-    if (_myManagedObjectModel)
-        return _myManagedObjectModel;
+-(NSManagedObjectModel*)vsManagedObjectModel {
+    if (_vsManagedObjectModel)
+        return _vsManagedObjectModel;
     
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *modelPath = [bundle pathForResource:@"TourImageModel" ofType:@"momd"];
-    _myManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:modelPath]];
+    NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"TourImageModel"
+                                                          ofType:@"momd"];
+    _vsManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:
+                             [NSURL fileURLWithPath:modelPath]];
     
-    return _myManagedObjectModel;
+    return _vsManagedObjectModel;
 }
 
 -(NSManagedObjectModel*)managedObjectModel {
-    return self.myManagedObjectModel;
+    return self.vsManagedObjectModel;
 }
+
+#pragma mark - document managament
 
 - (FullImage*) initialImageForTour {
     NSEntityDescription* entityDescr = [NSEntityDescription entityForName:NSStringFromClass([FullImage class])
@@ -188,7 +163,6 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     
     fullImage.imageData = fullImageData;
     
-#warning set up error handling
     [self.managedObjectContext save:nil];
     [self.managedObjectContext refreshObject:thumbImage mergeChanges:NO];
     [self.managedObjectContext refreshObject:fullImage mergeChanges:NO];

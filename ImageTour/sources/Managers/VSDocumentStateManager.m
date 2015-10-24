@@ -101,6 +101,8 @@
     
 }
 
+#pragma mark - opening/closing of UIDocument
+
 - (void) safeCloseDocument:(VSDocument*) doc block:(void(^)())block
 {
     if(doc == nil)
@@ -109,7 +111,6 @@
     if(doc.documentState != UIDocumentStateClosed)
     {
         [doc closeWithCompletionHandler:^(BOOL success) {
-            
             if(success)
             {
                 block();
