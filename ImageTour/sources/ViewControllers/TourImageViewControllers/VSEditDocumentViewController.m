@@ -11,6 +11,7 @@
 
 #import "VSActivityBarItem.h"
 #import "VSImagePicker.h"
+#import "VSDocumentStateManager.h"
 
 #import "UIViewController+Messages.h"
 #import "NSOperationQueue+Sugar.h"
@@ -22,13 +23,21 @@
 >
 
 @property (nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
+@property (nonatomic, weak  ) UIBarButtonItem* addEntryItem;
 
 @property (nonatomic, strong) VSImagePicker* imagePicker;
 @property (nonatomic, weak)   VSActivityBarItem* activityItem;
 
+@property (nonatomic, strong) id observer;
+
 @end
 
 @implementation VSEditDocumentViewController
+
+- (void) dealloc
+{
+    [self nullifyDocument];
+}
 
 - (void)viewDidLoad
 {
@@ -38,6 +47,7 @@
                                                                                     target:self
                                                                                     action:@selector(addEntry)];
     self.navigationItem.rightBarButtonItem = addEntryButton;
+    self.addEntryItem = addEntryButton;
     
     self.imagePicker = [[VSImagePicker alloc] initWithPresentingViewController:self];
     self.imagePicker.delegate = self;
@@ -51,19 +61,41 @@
     
     [self.tableView reloadData];
 
+    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification
+                                                                      object:self.document
+                                                                       queue:[NSOperationQueue mainQueue]
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      if(self.document.documentState == UIDocumentStateClosed)
+                                                                      {
+                                                                          [self nullifyDocument];
+                                                                      }
+                                                                  }];
+
     
     VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
     self.activityItem = item;
     NSArray* rightItems = self.navigationItem.rightBarButtonItems;
     self.navigationItem.rightBarButtonItems = [rightItems arrayByAddingObject:item];
-
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
     
-#warning save document if we are returning to master controller
+    [self showHintOnceWithTitle:@"Edit tour" message:@"Це екран редагування турів. Тут відображаються усі картинки, які ви додали в тур. Додати нову картинку можна за допомогою кнопки '+'. Для видалення картинки зробіть swipe вліво на ній. Пам'ятайте, ваш тур завжди починатиметься з картинки, яка йде першою в списку."];
+    
+    [self showHintOnceWithTitle:@"Edit tour" message:@"Щоб створити нове посилання між картинками клацніть на картинці, яка буде містити це посилання."];
+}
+
+
+- (void) nullifyDocument
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+    self.document = nil;
+    self.addEntryItem.enabled = NO;
+    
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
 }
 
 #pragma mark - tableView
@@ -100,6 +132,13 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(self.fetchedResultsController.fetchedObjects.count < 2)
+        return [self showInfoMessage:@"You need to have at least two images in your tour to add links. Try adding new images using '+' button"
+                           withTitle:@"Error"];
+    
+    
     TourImage* originImage = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     VSEditImageViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"VSEditImageViewController"];
@@ -111,7 +150,6 @@
     
     __weak typeof(self) wSelf = self;
     controller.callback = ^(CGRect rect, TourImage* destinationImage){
-#warning investigate long time of work
         [wSelf.document addLinkWithRect:rect
                               fromImage:originImage
                                 toImage:destinationImage];
@@ -122,10 +160,11 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+#pragma mark - actions
+
 - (void) addEntry {
 #warning revert presentation of image picker
-    //[self.imagePicker pickAnImage];
-[self imagePickerDidPickImage:[UIImage imageNamed:@"a.jpg"]];
+    [self.imagePicker pickAnImage];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -141,6 +180,13 @@
     }
 }
 
+- (void) didCloseDocument:(VSDocument *)doc
+{
+    if(doc == self.document)
+    {
+        self.document = nil;
+    }
+}
 
 #pragma - mark ImagePicker delegate 
 

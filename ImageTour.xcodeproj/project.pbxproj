@@ -38,9 +38,13 @@
 		73897F5F1BD7D12F0048AC61 /* VSSelectingRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F5E1BD7D12F0048AC61 /* VSSelectingRectView.m */; settings = {ASSET_TAGS = (); }; };
 		73897F611BD7D5250048AC61 /* Circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 73897F601BD7D5250048AC61 /* Circle.png */; settings = {ASSET_TAGS = (); }; };
 		73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */; settings = {ASSET_TAGS = (); }; };
 		739ED2D81BDA4E8C0044D75D /* VSActivityBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */; settings = {ASSET_TAGS = (); }; };
 		739ED2DB1BDA535C0044D75D /* NSOperationQueue+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */; settings = {ASSET_TAGS = (); }; };
+		739ED2E21BDA90B80044D75D /* VSDocumentStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2E11BDA90B80044D75D /* VSDocumentStateManager.m */; settings = {ASSET_TAGS = (); }; };
+		739ED2E41BDB749B0044D75D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 739ED2E31BDB749B0044D75D /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		739ED2E71BDB75860044D75D /* VSPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2E61BDB75860044D75D /* VSPreferences.m */; settings = {ASSET_TAGS = (); }; };
+		739ED2F11BDB81F80044D75D /* UIViewController+Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2EE1BDB81F80044D75D /* UIViewController+Messages.m */; settings = {ASSET_TAGS = (); }; };
+		739ED2F21BDB81F80044D75D /* VSHint.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2F01BDB81F80044D75D /* VSHint.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,12 +103,19 @@
 		73897F601BD7D5250048AC61 /* Circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Circle.png; sourceTree = "<group>"; };
 		73897F621BD7EF1B0048AC61 /* VSTourImageSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSTourImageSelectionViewController.h; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.h; sourceTree = "<group>"; };
 		73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSTourImageSelectionViewController.m; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.m; sourceTree = "<group>"; };
-		73897F651BD7F1C00048AC61 /* UIViewController+Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Messages.h"; path = "Utils/Categories/UIViewController+Messages.h"; sourceTree = "<group>"; };
-		73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Messages.m"; path = "Utils/Categories/UIViewController+Messages.m"; sourceTree = "<group>"; };
 		739ED2D61BDA4E8C0044D75D /* VSActivityBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSActivityBarItem.h; sourceTree = "<group>"; };
 		739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSActivityBarItem.m; sourceTree = "<group>"; };
 		739ED2D91BDA535C0044D75D /* NSOperationQueue+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSOperationQueue+Sugar.h"; path = "Utils/Categories/NSOperationQueue+Sugar.h"; sourceTree = "<group>"; };
 		739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSOperationQueue+Sugar.m"; path = "Utils/Categories/NSOperationQueue+Sugar.m"; sourceTree = "<group>"; };
+		739ED2E01BDA90B80044D75D /* VSDocumentStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSDocumentStateManager.h; path = Managers/VSDocumentStateManager.h; sourceTree = "<group>"; };
+		739ED2E11BDA90B80044D75D /* VSDocumentStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSDocumentStateManager.m; path = Managers/VSDocumentStateManager.m; sourceTree = "<group>"; };
+		739ED2E31BDB749B0044D75D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		739ED2E51BDB75860044D75D /* VSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSPreferences.h; path = Managers/VSPreferences.h; sourceTree = "<group>"; };
+		739ED2E61BDB75860044D75D /* VSPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSPreferences.m; path = Managers/VSPreferences.m; sourceTree = "<group>"; };
+		739ED2ED1BDB81F80044D75D /* UIViewController+Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Messages.h"; path = "Utils/Categories/Messages/UIViewController+Messages.h"; sourceTree = "<group>"; };
+		739ED2EE1BDB81F80044D75D /* UIViewController+Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Messages.m"; path = "Utils/Categories/Messages/UIViewController+Messages.m"; sourceTree = "<group>"; };
+		739ED2EF1BDB81F80044D75D /* VSHint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSHint.h; path = Utils/Categories/Messages/VSHint.h; sourceTree = "<group>"; };
+		739ED2F01BDB81F80044D75D /* VSHint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSHint.m; path = Utils/Categories/Messages/VSHint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,12 +165,11 @@
 		734403181BD671CB00B1FFD3 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				739ED2E91BDB81B80044D75D /* Messages */,
 				734403151BD671C800B1FFD3 /* UIImage+Resize.h */,
 				734403161BD671C800B1FFD3 /* UIImage+Resize.m */,
 				73897F541BD792400048AC61 /* NSArray+Utils.h */,
 				73897F551BD792400048AC61 /* NSArray+Utils.m */,
-				73897F651BD7F1C00048AC61 /* UIViewController+Messages.h */,
-				73897F661BD7F1C00048AC61 /* UIViewController+Messages.m */,
 				739ED2D91BDA535C0044D75D /* NSOperationQueue+Sugar.h */,
 				739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */,
 			);
@@ -216,6 +226,7 @@
 				735BC49F1BD5347B00BD960D /* LaunchScreen.storyboard */,
 				735BC4A21BD5347B00BD960D /* Info.plist */,
 				735BC48C1BD5347B00BD960D /* main.m */,
+				739ED2E31BDB749B0044D75D /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -223,6 +234,7 @@
 		735BC4A81BD5367F00BD960D /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				739ED2DF1BDA908E0044D75D /* Manager */,
 				735BC4CC1BD5470C00BD960D /* Utils */,
 				735BC4BB1BD5427600BD960D /* ViewControllers */,
 				735BC4B51BD53EF600BD960D /* view */,
@@ -306,6 +318,28 @@
 			name = SelectRect;
 			sourceTree = "<group>";
 		};
+		739ED2DF1BDA908E0044D75D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				739ED2E01BDA90B80044D75D /* VSDocumentStateManager.h */,
+				739ED2E11BDA90B80044D75D /* VSDocumentStateManager.m */,
+				739ED2E51BDB75860044D75D /* VSPreferences.h */,
+				739ED2E61BDB75860044D75D /* VSPreferences.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		739ED2E91BDB81B80044D75D /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				739ED2ED1BDB81F80044D75D /* UIViewController+Messages.h */,
+				739ED2EE1BDB81F80044D75D /* UIViewController+Messages.m */,
+				739ED2EF1BDB81F80044D75D /* VSHint.h */,
+				739ED2F01BDB81F80044D75D /* VSHint.m */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,6 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				739ED2E41BDB749B0044D75D /* Settings.bundle in Resources */,
 				735BC4A11BD5347B00BD960D /* LaunchScreen.storyboard in Resources */,
 				735BC49E1BD5347B00BD960D /* Assets.xcassets in Resources */,
 				735BC49C1BD5347B00BD960D /* Main.storyboard in Resources */,
@@ -388,9 +423,11 @@
 				735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */,
 				7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */,
 				735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */,
-				73897F671BD7F1C00048AC61 /* UIViewController+Messages.m in Sources */,
+				739ED2E21BDA90B80044D75D /* VSDocumentStateManager.m in Sources */,
 				732756D21BD91E3B00B2045E /* FullImage.m in Sources */,
+				739ED2F11BDB81F80044D75D /* UIViewController+Messages.m in Sources */,
 				732756931BD8FA9600B2045E /* VSTourImageView.m in Sources */,
+				739ED2E71BDB75860044D75D /* VSPreferences.m in Sources */,
 				739ED2DB1BDA535C0044D75D /* NSOperationQueue+Sugar.m in Sources */,
 				739ED2D81BDA4E8C0044D75D /* VSActivityBarItem.m in Sources */,
 				735BC48D1BD5347B00BD960D /* main.m in Sources */,
@@ -408,6 +445,7 @@
 				73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */,
 				735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */,
 				732756D41BD91E3B00B2045E /* TourImage.m in Sources */,
+				739ED2F21BDB81F80044D75D /* VSHint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

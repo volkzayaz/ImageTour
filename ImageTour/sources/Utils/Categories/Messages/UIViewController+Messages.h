@@ -16,5 +16,9 @@ typedef void(^MessageCallback)();
 
 - (void) showInfoMessage:(NSString *)text withTitle:(NSString *)title callback:(MessageCallback)callback;
 
+- (void) showGreeting;
+
+///hints will not be displayed if user turned them off in settings
+- (void) showHintOnceWithTitle:(NSString*)title message:(NSString*)message;
 
 @end

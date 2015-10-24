@@ -11,6 +11,6 @@
 
 @interface VSEditDocumentViewController : UITableViewController
 
-@property (nonatomic, strong) VSDocument* document;
+@property (nonatomic, weak) VSDocument* document;
 
 @end

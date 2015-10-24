@@ -36,6 +36,13 @@
     [self addObserver:self forKeyPath:@"selectedRect" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self showHintOnceWithTitle:@"Edit Image" message:@"Цей екран призначений для створення зони посилання. Зона відмічена оранжевим квадратом з синіми колами по кутах. Для зміни розмірів посилання потягніть за кути квадрата. Коли зона буде готова, натисніть кнопку 'Destination image' для вибору картинки на яку веде створене посилання"];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSString *,id> *)change

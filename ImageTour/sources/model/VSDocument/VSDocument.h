@@ -30,7 +30,9 @@ typedef void(^VSImportDocumentCallback)(VSDocument* newDocument, NSError* error)
 
 - (NSFetchedResultsController*) allThumbnails;
 
-- (FullImage* /*nullable*/) nextImageForTappingOnPoint:(CGPoint)point onImage:(FullImage*)tourImage;
+- (FullImage* /*nullable*/) nextImageForTappingOnPoint:(CGPoint)point
+                                               onImage:(FullImage*)tourImage;
+
 - (FullImage*) imageForManagedObjectID:(NSManagedObjectID*)objectID;
 
 - (TourImage*) addImageWithImage:(UIImage*)image;

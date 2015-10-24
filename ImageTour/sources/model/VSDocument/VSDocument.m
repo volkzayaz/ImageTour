@@ -203,7 +203,7 @@ CGSize kThumbnailSize = (CGSize){100, 100};
     [self.managedObjectContext save:nil];
 }
 
-- (FullImage *)nextImageForTappingOnPoint:(CGPoint)point onImage:(FullImage *)tourImage {
+- (FullImage *)nextImageForTappingOnPoint:(CGPoint)point onImage:(FullImage *)tourImage{
 
     NSFetchRequest* allLinksRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([ImageLink class])];
     allLinksRequest.predicate = [NSPredicate predicateWithFormat:@"fromTourImage.fullImage == %@",tourImage];
@@ -219,8 +219,8 @@ CGSize kThumbnailSize = (CGSize){100, 100};
             return link.toTourImage.fullImage;
         }
     }
-    
-    ///no links for point found
+
+///no links for point found
     return nil;
 }
 

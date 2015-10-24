@@ -32,6 +32,8 @@
     _displayImage = displayImage;
     
     self.mainImageView.image = displayImage;
+    [self.mainImageView.layer addAnimation:[CATransition animation] forKey:kCATransition];
+
     if(self.isViewLoaded)
     {
         [self.view setNeedsLayout];

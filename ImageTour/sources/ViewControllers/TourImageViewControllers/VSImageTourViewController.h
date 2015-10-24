@@ -13,7 +13,7 @@
 
 @interface VSImageTourViewController : VSBaseTourImageViewController
 
-@property (strong, nonatomic) VSDocument* document;
+@property (weak, nonatomic) VSDocument* document;
 
 @end
 

@@ -9,25 +9,39 @@
 #import "VSImageTourViewController.h"
 
 #import "VSActivityBarItem.h"
+#import "VSDocumentStateManager.h"
 
 #import "NSOperationQueue+Sugar.h"
+#import "UIViewController+Messages.h"
 
-@interface VSImageTourViewController () <VSBaseTourImageDelegate>
+#import "VSPreferences.h"
+
+@interface VSImageTourViewController ()
+<
+    VSBaseTourImageDelegate
+>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *fromBegginingButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *forwardButton;
 
-@property (weak, nonatomic)        VSActivityBarItem *activityBarItem;
+@property (weak, nonatomic) VSActivityBarItem *activityBarItem;
 
 @property (nonatomic, strong) FullImage* presentedImage;
 
 @property (nonatomic, strong) NSMutableArray<NSManagedObjectID*>* backStack;
 @property (nonatomic, strong) NSMutableArray<NSManagedObjectID*>* forwardStack;
 
+@property (nonatomic, strong) id observer;
+
 @end
 
 @implementation VSImageTourViewController
+
+- (void)dealloc
+{
+    [self nullifyDocument];
+}
 
 - (void)setPresentedImage:(FullImage *)presentedImage {
     _presentedImage = presentedImage;
@@ -38,10 +52,13 @@
     
     self.displayImage = presentedImage.image;
     
-    NSArray* ar = [self.document rectsForImage:presentedImage.tourImage];
-    for(NSValue* val in ar)
+    if(VSPreferences.showsSelectionAreas)
     {
-        [self displayRectOnMainImage:[val CGRectValue]];
+        NSArray* ar = [self.document rectsForImage:presentedImage.tourImage];
+        for(NSValue* val in ar)
+        {
+            [self displayRectOnMainImage:[val CGRectValue]];
+        }
     }
 }
 
@@ -54,6 +71,16 @@
     self.presentedImage = self.document.initialImageForTour;
     self.delegate = self;
     
+    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification
+                                                      object:self.document
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      if(self.document.documentState == UIDocumentStateClosed)
+                                                      {
+                                                          [self nullifyDocument];
+                                                      }
+    }];
+    
     VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
     self.activityBarItem = item;
     NSArray* rightItems = self.navigationItem.rightBarButtonItems;
@@ -62,9 +89,24 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    
+    [self showHintOnceWithTitle:@"Tour" message:@"Це екран перегляду турів. Червоними зонами відмічені існуючі переходи до інших картинок. Ви можете вимкнути опцію відображення цих зон в налаштуваннях вашого пристрою в розділі ImageTour. Кнопки навігації розташовані праворуч на UINavigationItem."];
 }
 
+- (void) nullifyDocument
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+    self.document = nil;
+    self.presentedImage = nil;
+    
+    [self.backStack removeAllObjects];
+    [self.forwardStack removeAllObjects];
+}
+
+#pragma mark - parent methot
+
+//@override
 - (void) didTapOnImageAtPoint:(CGPoint)point
 {
     [self.activityBarItem startAnimating];
@@ -74,13 +116,15 @@
     } nextUIBlock:^(FullImage* nextImage) {
         if(nextImage)
         {
-#warning optionally present transition animation
             [self.backStack addObject:self.presentedImage.objectID];
+            
             self.presentedImage = nextImage;
         }
         [self.activityBarItem stopAnimating];
     }];
 }
+
+#pragma mark - target/actions calls
 
 - (IBAction)forward:(id)sender {
     NSManagedObjectID* lastFileKey = self.forwardStack.lastObject;
