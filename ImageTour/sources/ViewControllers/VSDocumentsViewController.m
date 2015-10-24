@@ -20,8 +20,6 @@
 #import "UIViewController+Messages.h"
 #import "NSOperationQueue+Sugar.h"
 
-@import MessageUI;
-
 @interface VSDocumentsViewController ()
 <
     VSTableCellDelegate,
@@ -220,7 +218,7 @@
             [cell stopAnimationProgress];
             self.documentController = [UIDocumentInteractionController interactionControllerWithURL:res];
             self.documentController.UTI = @"com.286.vs";
-            [self.documentController presentOpenInMenuFromRect:cell.exportButton.frame
+            [self.documentController presentOpenInMenuFromRect:cell.exportButtonFrame
                                                         inView:cell.contentView
                                                       animated:YES];
         }];

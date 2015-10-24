@@ -11,7 +11,7 @@
 
 typedef void(^TourImageSelectionCallback)(TourImage* selectedTourImage);
 
-@interface VSTourImageSelectionViewController : UITableViewController
+@interface VSThumbnailsSelectionViewController : UITableViewController
 
 @property (nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
 @property (nonatomic, strong) TourImageSelectionCallback callback;

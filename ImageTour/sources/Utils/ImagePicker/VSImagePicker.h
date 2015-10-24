@@ -18,10 +18,8 @@
 
 - (instancetype) initWithPresentingViewController:(UIViewController*) presentingViewController;
 
-//will be used into action sheet
-@property (nonatomic, strong) NSString* descriptionString;
-
 @property (nonatomic, weak) id<VSImagePickerDelegate> delegate;
+@property (nonatomic, strong) NSString* descriptionString;
 
 - (void) pickAnImage;
 

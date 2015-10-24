@@ -16,9 +16,6 @@
 		732756D21BD91E3B00B2045E /* FullImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756CA1BD91E3B00B2045E /* FullImage.m */; settings = {ASSET_TAGS = (); }; };
 		732756D31BD91E3B00B2045E /* TourImage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756CC1BD91E3B00B2045E /* TourImage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		732756D41BD91E3B00B2045E /* TourImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756CE1BD91E3B00B2045E /* TourImage.m */; settings = {ASSET_TAGS = (); }; };
-		732756DE1BD9352900B2045E /* VSImageTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756D91BD9352900B2045E /* VSImageTourViewController.m */; settings = {ASSET_TAGS = (); }; };
-		732756DF1BD9352900B2045E /* VSBaseTourImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */; settings = {ASSET_TAGS = (); }; };
-		732756E01BD9352900B2045E /* VSEditDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 734403161BD671C800B1FFD3 /* UIImage+Resize.m */; settings = {ASSET_TAGS = (); }; };
 		7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031A1BD674D900B1FFD3 /* VSDocument+URLManagement.m */; settings = {ASSET_TAGS = (); }; };
 		7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344031E1BD6750400B1FFD3 /* VSDocument.m */; settings = {ASSET_TAGS = (); }; };
@@ -26,11 +23,8 @@
 		735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC48F1BD5347B00BD960D /* AppDelegate.m */; };
 		735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4B81BD53F0700BD960D /* VSTableCell.m */; settings = {ASSET_TAGS = (); }; };
 		735BC4C31BD542A400BD960D /* VSDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C01BD542A400BD960D /* VSDocumentsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4C61BD5444000BD960D /* VSEditImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		735BC4CF1BD5475000BD960D /* VSImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BC4CE1BD5475000BD960D /* VSImagePicker.m */; settings = {ASSET_TAGS = (); }; };
-		73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F551BD792400048AC61 /* NSArray+Utils.m */; settings = {ASSET_TAGS = (); }; };
 		73897F5F1BD7D12F0048AC61 /* VSSelectingRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F5E1BD7D12F0048AC61 /* VSSelectingRectView.m */; settings = {ASSET_TAGS = (); }; };
-		73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		739ED2D81BDA4E8C0044D75D /* VSActivityBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */; settings = {ASSET_TAGS = (); }; };
 		739ED2DB1BDA535C0044D75D /* NSOperationQueue+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */; settings = {ASSET_TAGS = (); }; };
 		739ED2E21BDA90B80044D75D /* VSDocumentStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED2E11BDA90B80044D75D /* VSDocumentStateManager.m */; settings = {ASSET_TAGS = (); }; };
@@ -43,6 +37,11 @@
 		739ED3011BDBAEEA0044D75D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 739ED2FE1BDBAEEA0044D75D /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		739ED3031BDBAF0A0044D75D /* Example_Tour.vs in Resources */ = {isa = PBXBuildFile; fileRef = 739ED3021BDBAF0A0044D75D /* Example_Tour.vs */; settings = {ASSET_TAGS = (); }; };
 		739ED3051BDBB1060044D75D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 739ED3041BDBB1060044D75D /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		739ED30C1BDBB5720044D75D /* VSBaseTourImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED3071BDBB5720044D75D /* VSBaseTourImageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		739ED30E1BDBB5720044D75D /* VSImageTourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED30B1BDBB5720044D75D /* VSImageTourViewController.m */; settings = {ASSET_TAGS = (); }; };
+		739ED3111BDBB5E60044D75D /* VSThumbnailsSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED3101BDBB5E60044D75D /* VSThumbnailsSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		739ED3161BDBB5F10044D75D /* VSEditDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED3131BDBB5F10044D75D /* VSEditDocumentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		739ED3171BDBB5F10044D75D /* VSEditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 739ED3151BDBB5F10044D75D /* VSEditImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,12 +62,6 @@
 		732756CC1BD91E3B00B2045E /* TourImage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TourImage+CoreDataProperties.m"; path = "CoreData/TourImage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		732756CD1BD91E3B00B2045E /* TourImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourImage.h; path = CoreData/TourImage.h; sourceTree = "<group>"; };
 		732756CE1BD91E3B00B2045E /* TourImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TourImage.m; path = CoreData/TourImage.m; sourceTree = "<group>"; };
-		732756D81BD9352900B2045E /* VSImageTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSImageTourViewController.h; sourceTree = "<group>"; };
-		732756D91BD9352900B2045E /* VSImageTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSImageTourViewController.m; sourceTree = "<group>"; };
-		732756DA1BD9352900B2045E /* VSBaseTourImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSBaseTourImageViewController.h; sourceTree = "<group>"; };
-		732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSBaseTourImageViewController.m; sourceTree = "<group>"; };
-		732756DC1BD9352900B2045E /* VSEditDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditDocumentViewController.h; sourceTree = "<group>"; };
-		732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditDocumentViewController.m; sourceTree = "<group>"; };
 		734403151BD671C800B1FFD3 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Utils/Categories/UIImage+Resize.h"; sourceTree = "<group>"; };
 		734403161BD671C800B1FFD3 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Utils/Categories/UIImage+Resize.m"; sourceTree = "<group>"; };
 		734403191BD674D900B1FFD3 /* VSDocument+URLManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSDocument+URLManagement.h"; path = "VSDocument/VSDocument+URLManagement.h"; sourceTree = "<group>"; };
@@ -84,16 +77,10 @@
 		735BC4B81BD53F0700BD960D /* VSTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTableCell.m; sourceTree = "<group>"; };
 		735BC4BF1BD542A400BD960D /* VSDocumentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSDocumentsViewController.h; sourceTree = "<group>"; };
 		735BC4C01BD542A400BD960D /* VSDocumentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSDocumentsViewController.m; sourceTree = "<group>"; };
-		735BC4C51BD5444000BD960D /* VSEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSEditImageViewController.h; sourceTree = "<group>"; };
-		735BC4C61BD5444000BD960D /* VSEditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSEditImageViewController.m; sourceTree = "<group>"; };
 		735BC4CD1BD5475000BD960D /* VSImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSImagePicker.h; path = ImageTour/sources/Utils/ImagePicker/VSImagePicker.h; sourceTree = SOURCE_ROOT; };
 		735BC4CE1BD5475000BD960D /* VSImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSImagePicker.m; path = ImageTour/sources/Utils/ImagePicker/VSImagePicker.m; sourceTree = SOURCE_ROOT; };
-		73897F541BD792400048AC61 /* NSArray+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Utils.h"; path = "Utils/Categories/NSArray+Utils.h"; sourceTree = "<group>"; };
-		73897F551BD792400048AC61 /* NSArray+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Utils.m"; path = "Utils/Categories/NSArray+Utils.m"; sourceTree = "<group>"; };
 		73897F5D1BD7D12F0048AC61 /* VSSelectingRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSSelectingRectView.h; path = ImageTour/sources/view/VSSelectingRectView.h; sourceTree = SOURCE_ROOT; };
 		73897F5E1BD7D12F0048AC61 /* VSSelectingRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSSelectingRectView.m; path = ImageTour/sources/view/VSSelectingRectView.m; sourceTree = SOURCE_ROOT; };
-		73897F621BD7EF1B0048AC61 /* VSTourImageSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSTourImageSelectionViewController.h; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.h; sourceTree = "<group>"; };
-		73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSTourImageSelectionViewController.m; path = VSTourImageSelectionViewController/VSTourImageSelectionViewController.m; sourceTree = "<group>"; };
 		739ED2D61BDA4E8C0044D75D /* VSActivityBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSActivityBarItem.h; sourceTree = "<group>"; };
 		739ED2D71BDA4E8C0044D75D /* VSActivityBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSActivityBarItem.m; sourceTree = "<group>"; };
 		739ED2D91BDA535C0044D75D /* NSOperationQueue+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSOperationQueue+Sugar.h"; path = "Utils/Categories/NSOperationQueue+Sugar.h"; sourceTree = "<group>"; };
@@ -113,6 +100,16 @@
 		739ED2FF1BDBAEEA0044D75D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = resorces/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		739ED3021BDBAF0A0044D75D /* Example_Tour.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Example_Tour.vs; path = resorces/Example_Tour.vs; sourceTree = "<group>"; };
 		739ED3041BDBB1060044D75D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = resorces/Settings.bundle; sourceTree = "<group>"; };
+		739ED3061BDBB5720044D75D /* VSBaseTourImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSBaseTourImageViewController.h; path = ImageTour/sources/ViewControllers/TourImage/VSBaseTourImageViewController.h; sourceTree = SOURCE_ROOT; };
+		739ED3071BDBB5720044D75D /* VSBaseTourImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSBaseTourImageViewController.m; path = ImageTour/sources/ViewControllers/TourImage/VSBaseTourImageViewController.m; sourceTree = SOURCE_ROOT; };
+		739ED30A1BDBB5720044D75D /* VSImageTourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSImageTourViewController.h; path = ImageTour/sources/ViewControllers/TourImage/VSImageTourViewController.h; sourceTree = SOURCE_ROOT; };
+		739ED30B1BDBB5720044D75D /* VSImageTourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSImageTourViewController.m; path = ImageTour/sources/ViewControllers/TourImage/VSImageTourViewController.m; sourceTree = SOURCE_ROOT; };
+		739ED30F1BDBB5E60044D75D /* VSThumbnailsSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSThumbnailsSelectionViewController.h; path = EditDocument/VSThumbnailsSelectionViewController.h; sourceTree = "<group>"; };
+		739ED3101BDBB5E60044D75D /* VSThumbnailsSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSThumbnailsSelectionViewController.m; path = EditDocument/VSThumbnailsSelectionViewController.m; sourceTree = "<group>"; };
+		739ED3121BDBB5F10044D75D /* VSEditDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSEditDocumentViewController.h; path = EditDocument/VSEditDocumentViewController.h; sourceTree = "<group>"; };
+		739ED3131BDBB5F10044D75D /* VSEditDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSEditDocumentViewController.m; path = EditDocument/VSEditDocumentViewController.m; sourceTree = "<group>"; };
+		739ED3141BDBB5F10044D75D /* VSEditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSEditImageViewController.h; path = EditDocument/VSEditImageViewController.h; sourceTree = "<group>"; };
+		739ED3151BDBB5F10044D75D /* VSEditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSEditImageViewController.m; path = EditDocument/VSEditImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,16 +143,15 @@
 			name = "CoreData Entities";
 			sourceTree = "<group>";
 		};
-		732756D71BD9352900B2045E /* TourImageViewControllers */ = {
+		732756D71BD9352900B2045E /* TourImage */ = {
 			isa = PBXGroup;
 			children = (
-				732756D81BD9352900B2045E /* VSImageTourViewController.h */,
-				732756D91BD9352900B2045E /* VSImageTourViewController.m */,
-				732756DA1BD9352900B2045E /* VSBaseTourImageViewController.h */,
-				732756DB1BD9352900B2045E /* VSBaseTourImageViewController.m */,
-				732756DC1BD9352900B2045E /* VSEditDocumentViewController.h */,
-				732756DD1BD9352900B2045E /* VSEditDocumentViewController.m */,
+				739ED3061BDBB5720044D75D /* VSBaseTourImageViewController.h */,
+				739ED3071BDBB5720044D75D /* VSBaseTourImageViewController.m */,
+				739ED30A1BDBB5720044D75D /* VSImageTourViewController.h */,
+				739ED30B1BDBB5720044D75D /* VSImageTourViewController.m */,
 			);
+			name = TourImage;
 			path = TourImageViewControllers;
 			sourceTree = "<group>";
 		};
@@ -165,8 +161,6 @@
 				739ED2E91BDB81B80044D75D /* Messages */,
 				734403151BD671C800B1FFD3 /* UIImage+Resize.h */,
 				734403161BD671C800B1FFD3 /* UIImage+Resize.m */,
-				73897F541BD792400048AC61 /* NSArray+Utils.h */,
-				73897F551BD792400048AC61 /* NSArray+Utils.m */,
 				739ED2D91BDA535C0044D75D /* NSOperationQueue+Sugar.h */,
 				739ED2DA1BDA535C0044D75D /* NSOperationQueue+Sugar.m */,
 			);
@@ -272,8 +266,8 @@
 		735BC4BB1BD5427600BD960D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				732756D71BD9352900B2045E /* TourImageViewControllers */,
-				73897F5C1BD7D0860048AC61 /* SelectRect */,
+				732756D71BD9352900B2045E /* TourImage */,
+				73897F5C1BD7D0860048AC61 /* EditDocument */,
 				735BC4BF1BD542A400BD960D /* VSDocumentsViewController.h */,
 				735BC4C01BD542A400BD960D /* VSDocumentsViewController.m */,
 				739ED2F71BDBA8500044D75D /* VSRootViewController.h */,
@@ -303,15 +297,17 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		73897F5C1BD7D0860048AC61 /* SelectRect */ = {
+		73897F5C1BD7D0860048AC61 /* EditDocument */ = {
 			isa = PBXGroup;
 			children = (
-				735BC4C51BD5444000BD960D /* VSEditImageViewController.h */,
-				735BC4C61BD5444000BD960D /* VSEditImageViewController.m */,
-				73897F621BD7EF1B0048AC61 /* VSTourImageSelectionViewController.h */,
-				73897F631BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m */,
+				739ED3121BDBB5F10044D75D /* VSEditDocumentViewController.h */,
+				739ED3131BDBB5F10044D75D /* VSEditDocumentViewController.m */,
+				739ED3141BDBB5F10044D75D /* VSEditImageViewController.h */,
+				739ED3151BDBB5F10044D75D /* VSEditImageViewController.m */,
+				739ED30F1BDBB5E60044D75D /* VSThumbnailsSelectionViewController.h */,
+				739ED3101BDBB5E60044D75D /* VSThumbnailsSelectionViewController.m */,
 			);
-			name = SelectRect;
+			name = EditDocument;
 			sourceTree = "<group>";
 		};
 		739ED2DF1BDA908E0044D75D /* Manager */ = {
@@ -412,10 +408,10 @@
 				735BC4CF1BD5475000BD960D /* VSImagePicker.m in Sources */,
 				73897F5F1BD7D12F0048AC61 /* VSSelectingRectView.m in Sources */,
 				732756D11BD91E3B00B2045E /* FullImage+CoreDataProperties.m in Sources */,
-				732756DF1BD9352900B2045E /* VSBaseTourImageViewController.m in Sources */,
 				735BC4B91BD53F0700BD960D /* VSTableCell.m in Sources */,
 				7344031F1BD6750400B1FFD3 /* VSDocument.m in Sources */,
 				735BC4901BD5347B00BD960D /* AppDelegate.m in Sources */,
+				739ED3161BDBB5F10044D75D /* VSEditDocumentViewController.m in Sources */,
 				739ED2E21BDA90B80044D75D /* VSDocumentStateManager.m in Sources */,
 				732756D21BD91E3B00B2045E /* FullImage.m in Sources */,
 				739ED2F11BDB81F80044D75D /* UIViewController+Messages.m in Sources */,
@@ -425,19 +421,18 @@
 				739ED2F91BDBA8500044D75D /* VSRootViewController.m in Sources */,
 				739ED2D81BDA4E8C0044D75D /* VSActivityBarItem.m in Sources */,
 				735BC48D1BD5347B00BD960D /* main.m in Sources */,
+				739ED30C1BDBB5720044D75D /* VSBaseTourImageViewController.m in Sources */,
+				739ED30E1BDBB5720044D75D /* VSImageTourViewController.m in Sources */,
 				732756D01BD91E3B00B2045E /* ImageLink.m in Sources */,
-				732756DE1BD9352900B2045E /* VSImageTourViewController.m in Sources */,
-				73897F641BD7EF1B0048AC61 /* VSTourImageSelectionViewController.m in Sources */,
 				732756D31BD91E3B00B2045E /* TourImage+CoreDataProperties.m in Sources */,
-				732756E01BD9352900B2045E /* VSEditDocumentViewController.m in Sources */,
 				735BC4C31BD542A400BD960D /* VSDocumentsViewController.m in Sources */,
 				7344031B1BD674D900B1FFD3 /* VSDocument+URLManagement.m in Sources */,
 				734403171BD671C800B1FFD3 /* UIImage+Resize.m in Sources */,
+				739ED3171BDBB5F10044D75D /* VSEditImageViewController.m in Sources */,
 				732756CF1BD91E3B00B2045E /* ImageLink+CoreDataProperties.m in Sources */,
 				732756C21BD91C6600B2045E /* TourImageModel.xcdatamodeld in Sources */,
 				732756961BD8FE8B00B2045E /* VSTransformUtility.m in Sources */,
-				73897F561BD792400048AC61 /* NSArray+Utils.m in Sources */,
-				735BC4C71BD5444000BD960D /* VSEditImageViewController.m in Sources */,
+				739ED3111BDBB5E60044D75D /* VSThumbnailsSelectionViewController.m in Sources */,
 				732756D41BD91E3B00B2045E /* TourImage.m in Sources */,
 				739ED2F21BDB81F80044D75D /* VSHint.m in Sources */,
 			);

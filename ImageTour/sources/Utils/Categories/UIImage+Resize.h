@@ -13,12 +13,11 @@
 - (UIImage*)proportionalResizeForSize:(CGSize)targetSize;
 
 /**
- *  @discussion - if image is smaller and narrower than passed size, than image size will be returned.
- *          Otherwise size will be calculated to fit in given size, occupy maximum space and keep aspect ratio
+ *  @discussion - if self is smaller and narrower than passed targetSize, than image size will be returned.
+ *          Otherwise ansewer fits in given targetSize, occupying maximum space and keeping original aspect ratio
  */
-- (CGSize) niceSizeToFitInSize:(CGSize)size;
+- (CGSize) niceSizeToFitInSize:(CGSize)targetSize;
 
-/// fix our png represented images in terms of rotation
 - (UIImage*) normalizedImage;
 
 @end

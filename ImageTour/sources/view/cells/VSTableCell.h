@@ -21,8 +21,6 @@
 
 @interface VSTableCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIButton *exportButton;
-
 + (NSString*) reuseIdentifier;
 @property (nonatomic, weak) id<VSTableCellDelegate> delegate;
 
@@ -30,5 +28,7 @@
 
 - (void) startAnimatingProgress;
 - (void) stopAnimationProgress;
+
+- (CGRect) exportButtonFrame;
 
 @end

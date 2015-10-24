@@ -13,12 +13,15 @@ typedef void(^MessageCallback)();
 @interface UIViewController (Messages)
 
 - (void) showInfoMessage:(NSString *)text withTitle:(NSString *)title;
-
 - (void) showInfoMessage:(NSString *)text withTitle:(NSString *)title callback:(MessageCallback)callback;
 
+/**
+ *  @discussion - Hints differ from info messages in two ways:
+ *  1) Hints tolerate user settings for "Show hints?"
+ *  2) Hints can be queued once per application lifetime. So it is possible to adress multiple calls of 
+ *  -showHint.
+ */
 - (void) showGreeting;
-
-///hints will not be displayed if user turned them off in settings
 - (void) showHintOnceWithTitle:(NSString*)title message:(NSString*)message;
 
 @end

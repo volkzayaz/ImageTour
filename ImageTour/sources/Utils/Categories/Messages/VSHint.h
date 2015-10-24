@@ -10,7 +10,8 @@
 
 @interface VSHint : NSObject
 
-+ (instancetype) hintWithTitle:(NSString*)title message:(NSString*)message;
++ (instancetype) hintWithTitle:(NSString*)title
+                       message:(NSString*)message;
 
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* message;

@@ -37,7 +37,7 @@
 - (void)stopAnimating
 {
     [self.activityView stopAnimating];
-        self.activityView.hidden = YES;
+    self.activityView.hidden = YES;
 }
 
 @end

@@ -11,21 +11,23 @@
 @protocol VSBaseTourImageDelegate <NSObject>
 
 @optional
-///@param point is calculated based on image size and is resolution independent
+/**
+ *  @param point - calculated based on image size and is resolution independent
+ */
 - (void) didTapOnImageAtPoint:(CGPoint)point;
 
 @end
 
 @interface VSBaseTourImageViewController : UIViewController
 
-@property (nonatomic, weak) id<VSBaseTourImageDelegate> delegate;
-@property (nonatomic, assign) BOOL showsSelectionRect;
+@property (nonatomic, weak  ) id<VSBaseTourImageDelegate> delegate;
+@property (nonatomic, strong) UIImage*                    displayImage;
+@property (nonatomic, assign) BOOL                        showsSelectionRect;
 
-///@param rect is calculated based on image size and is resolution independent
+/**
+ *  @param rect - calculated based on image size and is resolution independent
+ */
 @property (nonatomic, assign, readonly) CGRect selectedRect;
-
 - (void) displayRectOnMainImage:(CGRect)rect;
-
-@property (nonatomic, strong) UIImage* displayImage;
 
 @end

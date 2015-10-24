@@ -8,8 +8,8 @@
 
 #import "VSSelectingRectView.h"
 
-const CGFloat deviation = 40.;
-const CGFloat minSize = 30.;
+const CGFloat kDeviation = 40.;
+const CGFloat kMinSize = 50.;
 
 const CGFloat distance(CGPoint p1, CGPoint p2) {
     CGFloat xDist = (p2.x - p1.x);
@@ -24,7 +24,7 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
 @property (nonatomic, strong) UIImageView* bottomLeftThumb;
 @property (nonatomic, strong) UIImageView* bottomRightThumb;
 
-@property (nonatomic, weak) UIImageView* baseThumbForDragging;
+@property (nonatomic, weak)   UIImageView* baseThumbForDragging;
 
 @end
 
@@ -36,9 +36,9 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     
     if(self)
     {
-        self.upperLeftThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
-        self.upperRightThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
-        self.bottomLeftThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
+        self.upperLeftThumb   = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
+        self.upperRightThumb  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
+        self.bottomLeftThumb  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
         self.bottomRightThumb = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"circle"]];
         
         [self addSubview:self.upperRightThumb];
@@ -64,16 +64,16 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     CGPoint bottomLeftCenter = self.bottomLeftThumb.center;
     CGPoint bottomRightCenter = self.bottomRightThumb.center;
     
-    if(distance(location, upperLeftCenter) < deviation){
+    if(distance(location, upperLeftCenter) < kDeviation){
         self.baseThumbForDragging = self.upperLeftThumb;
     }
-    else if (distance(location, upperRightCenter) < deviation) {
+    else if (distance(location, upperRightCenter) < kDeviation) {
         self.baseThumbForDragging = self.upperRightThumb;
     }
-    else if(distance(location, bottomLeftCenter) < deviation) {
+    else if(distance(location, bottomLeftCenter) < kDeviation) {
         self.baseThumbForDragging = self.bottomLeftThumb;
     }
-    else if (distance(location, bottomRightCenter) < deviation) {
+    else if (distance(location, bottomRightCenter) < kDeviation) {
         self.baseThumbForDragging = self.bottomRightThumb;
     }
     else
@@ -95,16 +95,16 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     CGSize selfSize = self.bounds.size;
     
     ///we don't want to drag view beyond superview
-    if(moveLocation.x < 0 || moveLocation.x > parentViewSize.width ||
-       moveLocation.y < 0 || moveLocation.y > parentViewSize.height)
+    if(moveLocation.x <= 0 || moveLocation.x >= parentViewSize.width ||
+       moveLocation.y <= 0 || moveLocation.y >= parentViewSize.height)
         return;
     
     CGRect previosRect = self.frame;
     CGRect newRect = previosRect;
     
     if(self.baseThumbForDragging == self.upperLeftThumb &&
-       CGRectGetMaxX(previosRect) - moveLocation.x > minSize &&//we don't want view to be smaller than allowed size
-       CGRectGetMaxY(previosRect) - moveLocation.y > minSize)
+       CGRectGetMaxX(previosRect) - moveLocation.x > kMinSize &&//we don't want view to be smaller than allowed size
+       CGRectGetMaxY(previosRect) - moveLocation.y > kMinSize)
     {
         newRect = CGRectMake(moveLocation.x,
                              moveLocation.y,
@@ -112,8 +112,8 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
                              CGRectGetMaxY(previosRect) - moveLocation.y);
     }
     else if (self.baseThumbForDragging == self.upperRightThumb &&
-             moveLocation.x - CGRectGetMinX(previosRect) > minSize &&
-             CGRectGetMaxY(previosRect) - moveLocation.y > minSize)
+             moveLocation.x - CGRectGetMinX(previosRect) > kMinSize &&
+             CGRectGetMaxY(previosRect) - moveLocation.y > kMinSize)
     {
         newRect = CGRectMake(previosRect.origin.x,
                              moveLocation.y,
@@ -121,8 +121,8 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
                              CGRectGetMaxY(previosRect) - moveLocation.y);
     }
     else if (self.baseThumbForDragging == self.bottomLeftThumb &&
-             CGRectGetMaxX(previosRect) - moveLocation.x > minSize &&
-             moveLocation.y - CGRectGetMinY(previosRect) > minSize)
+             CGRectGetMaxX(previosRect) - moveLocation.x > kMinSize &&
+             moveLocation.y - CGRectGetMinY(previosRect) > kMinSize)
     {
         newRect = CGRectMake(moveLocation.x,
                              previosRect.origin.y,
@@ -130,8 +130,8 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
                              moveLocation.y - CGRectGetMinY(previosRect));
     }
     else if (self.baseThumbForDragging == self.bottomRightThumb &&
-             moveLocation.x - CGRectGetMinX(previosRect) > minSize &&
-             moveLocation.y - CGRectGetMinY(previosRect) > minSize)
+             moveLocation.x - CGRectGetMinX(previosRect) > kMinSize &&
+             moveLocation.y - CGRectGetMinY(previosRect) > kMinSize)
     {
         newRect = CGRectMake(previosRect.origin.x,
                              previosRect.origin.y,
@@ -139,10 +139,10 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
                              moveLocation.y - CGRectGetMinY(previosRect));
     }
     else if (self.baseThumbForDragging == nil &&
-             moveLocation.x + selfSize.width  / 2 < parentViewSize.width  &&//right border
-             moveLocation.x - selfSize.width  / 2 > 0                     &&//leftBorder
-             moveLocation.y + selfSize.height / 2 < parentViewSize.height &&//bottom border
-             moveLocation.y - selfSize.height / 2 > 0)
+             moveLocation.x + selfSize.width  / 2 <= parentViewSize.width  &&//right border
+             moveLocation.x - selfSize.width  / 2 >= 0                     &&//leftBorder
+             moveLocation.y + selfSize.height / 2 <= parentViewSize.height &&//bottom border
+             moveLocation.y - selfSize.height / 2 >= 0)
     {
         newRect = CGRectMake(moveLocation.x - previosRect.size.width  / 2,
                              moveLocation.y - previosRect.size.height / 2,
@@ -161,15 +161,18 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     
     CGSize viewSize = self.frame.size;
     
-    self.upperLeftThumb.frame = CGRectMake(0, 0, 10, 10);
-    self.upperRightThumb.frame = CGRectMake(0, 0, 10, 10);
-    self.bottomLeftThumb.frame = CGRectMake(0, 0, 10, 10);
-    self.bottomRightThumb.frame = CGRectMake(0, 0, 10, 10);
+    CGFloat r = 5;
+    CGFloat twoR = r * 2;
     
-    self.upperLeftThumb.center = CGPointZero;
-    self.upperRightThumb.center = (CGPoint){viewSize.width,0};
-    self.bottomLeftThumb.center = (CGPoint){0,viewSize.height};
-    self.bottomRightThumb.center = (CGPoint){viewSize.width,viewSize.height};
+    self.upperLeftThumb.frame   = CGRectMake(0, 0, twoR, twoR);
+    self.upperRightThumb.frame  = CGRectMake(0, 0, twoR, twoR);
+    self.bottomLeftThumb.frame  = CGRectMake(0, 0, twoR, twoR);
+    self.bottomRightThumb.frame = CGRectMake(0, 0, twoR, twoR);
+    
+    self.upperLeftThumb.center   = (CGPoint){r,r};
+    self.upperRightThumb.center  = (CGPoint){viewSize.width - r,r};
+    self.bottomLeftThumb.center  = (CGPoint){r,viewSize.height - r};
+    self.bottomRightThumb.center = (CGPoint){viewSize.width - r,viewSize.height - r};
 }
 
 

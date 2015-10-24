@@ -7,7 +7,7 @@
 //
 
 #import "VSEditImageViewController.h"
-#import "VSTourImageSelectionViewController.h"
+#import "VSThumbnailsSelectionViewController.h"
 
 #import "UIViewController+Messages.h"
 
@@ -57,7 +57,7 @@
 - (void) addRect:(id)sender {
     if(self.callback)
     {
-        VSTourImageSelectionViewController* controller = [[VSTourImageSelectionViewController alloc] initWithStyle:UITableViewStylePlain];
+        VSThumbnailsSelectionViewController* controller = [[VSThumbnailsSelectionViewController alloc] initWithStyle:UITableViewStylePlain];
         controller.modalPresentationStyle = UIModalPresentationFormSheet;
         controller.fetchedResultsController = self.selectionImagesController;
         

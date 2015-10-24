@@ -18,6 +18,4 @@
                         originSize:(CGSize)originSize
                    destinationSize:(CGSize)destSize;
 
-
-
 @end

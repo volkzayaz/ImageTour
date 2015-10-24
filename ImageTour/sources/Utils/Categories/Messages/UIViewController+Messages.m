@@ -14,24 +14,20 @@
 static NSMutableArray* hintQueue = nil;
 NSMutableArray* getHintQueue() {
     if(!hintQueue)
-    {
         hintQueue = [NSMutableArray array];
-    }
-    
     return hintQueue;
 }
 
 static NSMutableArray* shownHints = nil;
 NSMutableArray* getShownHints() {
     if(!shownHints)
-    {
         shownHints = [NSMutableArray array];
-    }
-    
     return shownHints;
 }
 
 @implementation UIViewController (Messages)
+
+#pragma mark - regular info messages
 
 - (void) showInfoMessage:(NSString *)text withTitle:(NSString *)title
 {
@@ -51,6 +47,8 @@ NSMutableArray* getShownHints() {
     [self presentViewController:controler animated:YES completion:nil];
 }
 
+#pragma mark - hints
+
 - (void)showGreeting
 {
     [self showHintOnceWithTitle:@"Вітаю в ImageTour!" message:@"Такі підказки будуть з'являтися на кожному екрані, щоб допомогти вам зорієнтуватися і дати підказки по користуванню додатком. Ось і перша підказка: ви можете вимкнути всі підказки в налаштуваннях вашого пристрою в розділі додатку ImageTour 😊"];
@@ -66,15 +64,16 @@ NSMutableArray* getShownHints() {
     }
 }
 
+#pragma mark - hints diplaying queue
+
 - (void) dispathcHint:(VSHint*)hint{
     if(![VSPreferences showsHintsOnViews])
         return;
     
     [getHintQueue() addObject:hint];
     if(getHintQueue().count == 1)//queue was empty
-    {
         [self displayHint:hint];
-    }
+    
 }
 
 - (void) displayHint:(VSHint*)hint

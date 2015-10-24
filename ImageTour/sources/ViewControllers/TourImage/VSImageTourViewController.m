@@ -24,14 +24,12 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *fromBegginingButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *forwardButton;
-
 @property (weak, nonatomic) VSActivityBarItem *activityBarItem;
-
-@property (nonatomic, strong) FullImage* presentedImage;
 
 @property (nonatomic, strong) NSMutableArray<NSManagedObjectID*>* backStack;
 @property (nonatomic, strong) NSMutableArray<NSManagedObjectID*>* forwardStack;
 
+@property (nonatomic, strong) FullImage* presentedImage;
 @property (nonatomic, strong) id observer;
 
 @end
@@ -41,6 +39,32 @@
 - (void)dealloc
 {
     [self nullifyDocument];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self)
+    {
+        self.backStack = [NSMutableArray array];
+        self.forwardStack = [NSMutableArray array];
+
+    }
+    
+    self.observer = [[NSNotificationCenter defaultCenter]
+                        addObserverForName:UIDocumentStateChangedNotification
+                        object:self.document
+                        queue:[NSOperationQueue mainQueue]
+                        usingBlock:^(NSNotification * _Nonnull note) {
+                            if(self.document.documentState == UIDocumentStateClosed)
+                            {
+                                [self nullifyDocument];
+                            }
+                        }];
+    
+    self.delegate = self;
+    
+    return self;
 }
 
 - (void)setPresentedImage:(FullImage *)presentedImage {
@@ -62,24 +86,12 @@
     }
 }
 
+#pragma mark - view lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.backStack = [NSMutableArray array];
-    self.forwardStack = [NSMutableArray array];
-    
     self.presentedImage = self.document.initialImageForTour;
-    self.delegate = self;
-    
-    self.observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIDocumentStateChangedNotification
-                                                      object:self.document
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      if(self.document.documentState == UIDocumentStateClosed)
-                                                      {
-                                                          [self nullifyDocument];
-                                                      }
-    }];
     
     VSActivityBarItem* item = [VSActivityBarItem activityBarItem];
     self.activityBarItem = item;
@@ -89,22 +101,12 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
     [self showHintOnceWithTitle:@"Tour" message:@"Це екран перегляду турів. Червоними зонами відмічені існуючі переходи до інших картинок. Ви можете вимкнути опцію відображення цих зон в налаштуваннях вашого пристрою в розділі ImageTour. Кнопки навігації розташовані праворуч на UINavigationItem."];
 }
 
-- (void) nullifyDocument
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
-    self.document = nil;
-    self.presentedImage = nil;
-    
-    [self.backStack removeAllObjects];
-    [self.forwardStack removeAllObjects];
-}
-
-#pragma mark - parent method
+#pragma mark - overriden methods
 
 //@override
 - (void) didTapOnImageAtPoint:(CGPoint)point
@@ -124,7 +126,7 @@
     }];
 }
 
-#pragma mark - target/actions calls
+#pragma mark - actions
 
 - (IBAction)forward:(id)sender {
     NSManagedObjectID* lastFileKey = self.forwardStack.lastObject;
@@ -167,6 +169,16 @@
         [self.activityBarItem stopAnimating];
         self.presentedImage = res;
     }];
+}
+
+- (void) nullifyDocument
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+    self.document = nil;
+    self.presentedImage = nil;
+    
+    [self.backStack removeAllObjects];
+    [self.forwardStack removeAllObjects];
 }
 
 @end

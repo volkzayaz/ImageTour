@@ -6,13 +6,9 @@
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
-#import "VSTourImageSelectionViewController.h"
+#import "VSThumbnailsSelectionViewController.h"
 
-@interface VSTourImageSelectionViewController ()
-
-@end
-
-@implementation VSTourImageSelectionViewController
+@implementation VSThumbnailsSelectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

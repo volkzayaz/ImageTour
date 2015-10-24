@@ -54,26 +54,35 @@
     
     if([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear])
     {
-        [imagePickerAlertController addAction:[UIAlertAction actionWithTitle:@"Camera"
-                                                                       style:UIAlertActionStyleDefault
-                                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                                         weakImagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                                                                         weakImagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-                                                                         [weakImagePicker setCameraDevice:UIImagePickerControllerCameraDeviceRear];
-                                                                         [weakPresenter presentViewController:weakImagePicker animated:YES completion:nil];
-        }]];
+        [imagePickerAlertController addAction:
+         [UIAlertAction actionWithTitle:@"Camera"
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * _) {
+                                    
+                                    weakImagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                    weakImagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+                                    [weakImagePicker setCameraDevice:UIImagePickerControllerCameraDeviceRear];
+                                    [weakPresenter presentViewController:weakImagePicker
+                                                                animated:YES
+                                                              completion:nil];
+                                }]];
     }
 
-    [imagePickerAlertController addAction:[UIAlertAction actionWithTitle:@"Photo Library"
-                                                                   style:UIAlertActionStyleDefault
-                                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                                     weakImagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                                     [weakPresenter presentViewController:weakImagePicker animated:YES completion:nil];
-    }]];
+    [imagePickerAlertController addAction:
+     [UIAlertAction actionWithTitle:@"Photo Library"
+                              style:UIAlertActionStyleDefault
+                            handler:^(UIAlertAction * _) {
+                                
+                                weakImagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                [weakPresenter presentViewController:weakImagePicker
+                                                            animated:YES
+                                                          completion:nil];
+                            }]];
     
-    [imagePickerAlertController addAction:[UIAlertAction actionWithTitle:@"Cancel"
-                                                                   style:UIAlertActionStyleDestructive
-                                                                 handler:nil]];
+    [imagePickerAlertController addAction:
+     [UIAlertAction actionWithTitle:@"Cancel"
+                              style:UIAlertActionStyleDestructive
+                            handler:nil]];
     
     imagePickerAlertController.popoverPresentationController.sourceView = self.presentingViewController.view;
     imagePickerAlertController.popoverPresentationController.sourceRect = self.presentingViewController.view.bounds;
@@ -100,7 +109,6 @@
             [self.delegate imagePickerDidPickImage:originalImage];
         }
     }
-    
     
     self.imagePicker = nil;
 }

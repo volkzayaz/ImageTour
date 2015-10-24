@@ -10,19 +10,17 @@
 
 #import "VSSelectingRectView.h"
 #import "VSTourImageView.h"
+#import "VSTransformUtility.h"
 
 #import "UIImage+Resize.h"
 
-#import "VSTransformUtility.h"
-
 @interface VSBaseTourImageViewController () <VSSelectingViewProtocol>
 
-@property (weak,   nonatomic, readwrite) VSTourImageView *mainImageView;
-@property (assign, nonatomic, readwrite) CGRect selectedRect;
-
+@property (weak,   nonatomic, readwrite) VSTourImageView*     mainImageView;
 @property (strong, nonatomic, readwrite) VSSelectingRectView* selectingRectView;
+@property (weak,   nonatomic, readwrite) UIImageView*         checkedBackground;
 
-@property (weak,   nonatomic, readwrite) UIImageView* checkedBackground;
+@property (assign, nonatomic, readwrite) CGRect selectedRect;
 
 @end
 
@@ -32,14 +30,16 @@
     _displayImage = displayImage;
     
     self.mainImageView.image = displayImage;
-    [self.mainImageView.layer addAnimation:[CATransition animation] forKey:kCATransition];
+    [self.mainImageView.layer addAnimation:[CATransition animation]
+                                    forKey:kCATransition];
 
     if(self.isViewLoaded)
     {
         [self.view setNeedsLayout];
     }
-    
 }
+
+#pragma mark - view lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,14 +77,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     self.checkedBackground.hidden = NO;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     self.checkedBackground.hidden = YES;
 }
 
@@ -99,6 +97,8 @@
     
     self.checkedBackground.frame = self.view.bounds;
 }
+
+#pragma mark - orientation changes
 
 - (void)viewWillTransitionToSize:(CGSize)size
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
@@ -116,6 +116,8 @@
     
 }
 
+#pragma mark - Selecting frame delegate
+
 - (void)didChangeSelectedFrame:(CGRect)selectedFrame
 {
     CGRect selectionViewFrame = selectedFrame;
@@ -125,11 +127,6 @@
     self.selectedRect = [VSTransformUtility transformedRectFromRect:selectionViewFrame
                                                        originSize:viewSize
                                                   destinationSize:imageSize];
-}
-
-- (void)displayRectOnMainImage:(CGRect)rect
-{
-    [self.mainImageView displayAttentionBoxInRect:rect];
 }
 
 #pragma mark - actions
@@ -147,6 +144,11 @@
                                                                destinationSize:imageSize]];
     }
     
+}
+
+- (void)displayRectOnMainImage:(CGRect)rect
+{
+    [self.mainImageView displayAttentionBoxInRect:rect];
 }
 
 @end

@@ -8,17 +8,15 @@
 
 #import "VSTableCell.h"
 
-@import MessageUI;
-
 @interface VSTableCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel  *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *exportButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 
 @property (nonatomic, strong) VSDocument* doc;
-
-
 
 @end
 
@@ -34,6 +32,10 @@
 
 - (IBAction)exportAction:(id)sender {
     [self.delegate tableCell:self exportDocument:self.doc];
+}
+
+- (CGRect)exportButtonFrame {
+    return self.exportButton.frame;
 }
 
 - (void)setDocument:(VSDocument *)document{

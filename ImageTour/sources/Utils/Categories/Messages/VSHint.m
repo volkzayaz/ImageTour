@@ -21,9 +21,10 @@
 
 - (BOOL) isEqual:(VSHint*)object
 {
-    return [object isMemberOfClass:[VSHint class]] &&
-            [object.message isEqualToString:self.message] &&
-    [object.title isEqualToString:self.title];
+    return
+    [object         isMemberOfClass:[VSHint class]] &&
+    [object.message isEqualToString:self.message] &&
+    [object.title   isEqualToString:self.title];
 }
 
 @end
