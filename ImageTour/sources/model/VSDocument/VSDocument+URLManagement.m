@@ -2,7 +2,7 @@
 //  VSDocument+URLManagement.m
 //  ImageTour
 //
-//  Created by Vlad Soroka on 10/20/15.
+//  Created by 286 on 10/20/15.
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
@@ -50,6 +50,11 @@
 + (NSURL *)urlForTemporaryDocument
 {
     return [[self.localRoot URLByAppendingPathComponent:TEMP_FILE_NAME] URLByAppendingPathExtension:VS_EXTENSION];
+}
+
++ (NSURL*)urlForExampleDocument
+{
+    return [[self.localRoot URLByAppendingPathComponent:@"0_Example"] URLByAppendingPathExtension:VS_EXTENSION];
 }
 
 + (NSArray<VSDocument*>*)localImageTourDocuments {

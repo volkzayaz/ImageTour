@@ -2,7 +2,7 @@
 //  MasterViewController.m
 //  ImageTour
 //
-//  Created by Vlad Soroka on 10/19/15.
+//  Created by 286 on 10/19/15.
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
@@ -90,7 +90,7 @@
 
 - (void) addExampleDocument
 {
-    NSURL* exampleDocURL = [VSDocument newUniqueUrlForDocument];
+    NSURL* exampleDocURL = [VSDocument urlForExampleDocument];
     [VSDocument importDcoumentFromURL:[[NSBundle mainBundle] URLForResource:@"Example_Tour"
                                                               withExtension:@"vs"]
                                 toURL:exampleDocURL

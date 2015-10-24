@@ -2,12 +2,12 @@
 //  UIImage+Resize.h
 //  ImageTour
 //
-//  Created by Vlad Soroka on 10/20/15.
+//  Created by 286 on 10/20/15.
 //  Copyright © 2015 com.286. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#warning remove all names Vlad Soroka from file headers
+
 @interface UIImage (Resize)
 
 - (UIImage*)proportionalResizeForSize:(CGSize)targetSize;
