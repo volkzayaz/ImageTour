@@ -76,6 +76,10 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     else if (distance(location, bottomRightCenter) < deviation) {
         self.baseThumbForDragging = self.bottomRightThumb;
     }
+    else
+    {
+        self.baseThumbForDragging = nil;
+    }
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -88,6 +92,7 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
     CGPoint moveLocation = [touches.anyObject locationInView:self.superview];
     
     CGSize parentViewSize = self.superview.bounds.size;
+    CGSize selfSize = self.bounds.size;
     
     ///we don't want to drag view beyond superview
     if(moveLocation.x < 0 || moveLocation.x > parentViewSize.width ||
@@ -129,9 +134,20 @@ const CGFloat distance(CGPoint p1, CGPoint p2) {
              moveLocation.y - CGRectGetMinY(previosRect) > minSize)
     {
         newRect = CGRectMake(previosRect.origin.x,
-                             previosRect.origin.x,
+                             previosRect.origin.y,
                              moveLocation.x - CGRectGetMinX(previosRect),
                              moveLocation.y - CGRectGetMinY(previosRect));
+    }
+    else if (self.baseThumbForDragging == nil &&
+             moveLocation.x + selfSize.width  / 2 < parentViewSize.width  &&//right border
+             moveLocation.x - selfSize.width  / 2 > 0                     &&//leftBorder
+             moveLocation.y + selfSize.height / 2 < parentViewSize.height &&//bottom border
+             moveLocation.y - selfSize.height / 2 > 0)
+    {
+        newRect = CGRectMake(moveLocation.x - previosRect.size.width  / 2,
+                             moveLocation.y - previosRect.size.height / 2,
+                             previosRect.size.width,
+                             previosRect.size.height);
     }
     
     self.frame = newRect;

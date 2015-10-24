@@ -104,7 +104,7 @@
     [self.forwardStack removeAllObjects];
 }
 
-#pragma mark - parent methot
+#pragma mark - parent method
 
 //@override
 - (void) didTapOnImageAtPoint:(CGPoint)point
