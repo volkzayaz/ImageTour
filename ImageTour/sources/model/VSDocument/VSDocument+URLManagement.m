@@ -21,7 +21,7 @@
 }
 
 + (NSString*) documentFileNameForIndex:(NSInteger)index {
-    return [NSString stringWithFormat:@"%li%@ImageTour.%@",index,FILE_NAME_SEPARATOR,VS_EXTENSION];
+    return [NSString stringWithFormat:@"%li%@ImageTour.%@",(long)index,FILE_NAME_SEPARATOR,VS_EXTENSION];
 }
 
 + (NSURL *)docURLForFileName:(NSString *)filename {
